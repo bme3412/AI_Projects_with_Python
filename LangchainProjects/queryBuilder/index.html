@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Query Form</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #eaeaea;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .form-container,
+      .pdf-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 50%;
+        max-width: 600px;
+        margin-bottom: 20px;
+      }
+      label {
+        font-size: 20px;
+        color: #333;
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="text"],
+      iframe {
+        width: calc(100% - 20px);
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      input[type="submit"] {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .pdf-container {
+        height: 500px; /* Adjust as needed */
+      }
+      iframe {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- File Upload Section -->
+    <div class="upload-container" style="margin-bottom: 20px;">
+        <form action="/" method="post" enctype="multipart/form-data" style="text-align: center;">
+            <label for="file" style="font-size: 20px; color: #333; display: block; margin-bottom: 10px;">
+                Upload your PDF file here:
+            </label>
+            <input type="file" id="file" name="file" accept=".pdf" required style="margin-bottom: 15px;">
+            <input type="submit" value="<GO>" style="width: auto; background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px;">
+        </form>
+        <!-- Display the message here -->
+        {% if message %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+    </div>
+
+    <div class="form-container">
+      <form action="/query" method="post">
+        <label for="query">Enter your query about the loaded file:</label>
+        <p style="font-size: 14px; color: grey">
+          Ex: What did the company say about the rollout of paid sharing in Q2
+          and Q3?
+        </p>
+        <p style="font-size: 14px; color: grey">
+          Ex: What was pricing growth and subscriber growth in Q2 and Q3 for
+          NFLX? Please provide numbers.
+        </p>
+        <input type="text" id="query" name="query" />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>
