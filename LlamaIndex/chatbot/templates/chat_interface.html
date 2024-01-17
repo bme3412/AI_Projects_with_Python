@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  </head>
+  <body>
+    <div id="left-container">
+        <input type="file" id="pdf-upload" accept=".pdf">
+        <button id="upload-btn">Upload PDF</button>
+        <button id="generate-embeddings-btn">Generate Embeddings</button>
+    </div>
+    <div id="chat-container">
+      <div id="chat-box">
+        <!-- Messages will be displayed here -->
+      </div>
+      <input type="text" id="user-input" placeholder="Ask a question..." />
+      <button id="send-btn">Send</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
