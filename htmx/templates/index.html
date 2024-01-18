@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMX File Upload</title>
+    <!-- Include HTMX -->
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+
+<!-- File Upload Form -->
+<form hx-post="/upload" hx-enc-type="multipart/form-data" hx-swap="outerHTML" hx-target="#result">
+    <input type="file" name="file" />
+    <button type="submit">Upload File</button>
+</form>
+
+<!-- Container to display result -->
+<div id="result"></div>
+
+</body>
+</html>
