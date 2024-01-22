@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Summarizer</h1>
+        <form id="uploadForm">
+            <input type="file" id="pdfFile" accept="application/pdf" required />
+            <button type="submit">Summarize</button>
+        </form>
+        <div id="summaryBox" class="summary-box hidden">
+            <h2>Summary</h2>
+            <p id="summaryText"></p>
+        </div>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
