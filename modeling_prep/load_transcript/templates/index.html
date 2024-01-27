@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Earnings Call Transcript</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+
+      form {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 500px; /* Reduced max width */
+        margin: 20px auto;
+      }
+
+      .form-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      input[type="text"],
+      button {
+        padding: 10px;
+        max-width: 150px; /* Further reduced max width */
+        flex-grow: 0; /* Prevent flex-grow */
+        margin: 0 auto; /* Centering items */
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .circle-container {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+        gap: 15px; /* Increased gap for more space */
+        margin-bottom: 10px;
+      }
+
+      .circle {
+        width: 30px; /* Slightly larger for better readability */
+        height: 30px;
+        background-color: #ddd;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      .circle.selected {
+        background-color: #007bff;
+        color: white;
+        transform: scale(1.15); /* Slightly enlarge selected circle */
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+      }
+
+      #transcriptDisplay {
+        background: #fff;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        min-height: 200px;
+      }
+
+      @media (max-width: 600px) {
+        input[type="text"],
+        button {
+          max-width: 100%;
+        }
+        .form-row {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Earnings Call Transcript</h1>
+
+    <form id="earningsForm" action="/" method="post">
+      <div class="form-row">
+        <label for="ticker">Ticker:</label>
+        <input
+          type="text"
+          id="ticker"
+          name="ticker"
+          value="{{ selected_ticker }}"
+          required
+        />
+        <button type="button" id="loadYearsButton">Submit</button>
+      </div>
+
+      <div id="dynamic-content" style="display: none">
+        <input type="hidden" id="year" name="year" />
+        <input type="hidden" id="quarter" name="quarter" />
+        <div class="form-row">
+          <div
+            aria-label="Year"
+            class="circle-container"
+            id="year-container"
+          ></div>
+        </div>
+        <div class="form-row">
+          <div aria-label="Quarter" class="circle-container">
+            <div class="circle" data-quarter="1">Q1</div>
+            <div class="circle" data-quarter="2">Q2</div>
+            <div class="circle" data-quarter="3">Q3</div>
+            <div class="circle" data-quarter="4">Q4</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <button type="button" id="loadTranscriptButton">
+            Load Transcript
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div id="transcriptDisplay"></div>
+
+    <script>
+      // Define submitForm globally
+      function submitForm() {
+        const tickerInput = document.getElementById("ticker");
+        const yearInput = document.getElementById("year");
+        const quarterInput = document.getElementById("quarter");
+
+        const ticker = tickerInput ? tickerInput.value : "";
+        const year = yearInput ? yearInput.value : "";
+        const quarter = quarterInput ? quarterInput.value : "";
+
+        if (ticker && year && quarter) {
+          var url = `/load-transcript?ticker=${ticker}&year=${year}&quarter=${quarter}`;
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("transcriptDisplay").innerHTML =
+                data.transcript_html;
+            })
+            .catch((error) => {
+              console.error("Error fetching transcript:", error);
+              alert("Failed to load transcript.");
+            });
+        } else {
+          alert("Please select a ticker, year, and quarter.");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const tickerInput = document.getElementById("ticker");
+        const yearContainer = document.getElementById("year-container");
+        const loadYearsButton = document.getElementById("loadYearsButton");
+
+        function updateYearCircles(years) {
+          yearContainer.innerHTML = "";
+          years.forEach((year) => {
+            const circle = document.createElement("div");
+            circle.className = "circle";
+            circle.textContent = year;
+            circle.setAttribute("data-year", year);
+            circle.addEventListener("click", function () {
+              document
+                .querySelectorAll("#year-container .circle")
+                .forEach((c) => c.classList.remove("selected"));
+              this.classList.add("selected");
+              document.getElementById("year").value =
+                this.getAttribute("data-year");
+            });
+            yearContainer.appendChild(circle);
+          });
+          updateQuarterCircles(); // Initialize quarter circles after years are loaded
+        }
+        const loadTranscriptButton = document.getElementById(
+          "loadTranscriptButton"
+        );
+        if (loadTranscriptButton) {
+          loadTranscriptButton.addEventListener("click", submitForm);
+        }
+
+        // Function to update quarter circles
+        function updateQuarterCircles() {
+          const quarterCircles = document.querySelectorAll(
+            ".circle[data-quarter]"
+          );
+          quarterCircles.forEach((circle) => {
+            circle.addEventListener("click", function () {
+              quarterCircles.forEach((c) => c.classList.remove("selected"));
+              this.classList.add("selected");
+              document.getElementById("quarter").value =
+                this.getAttribute("data-quarter");
+            });
+          });
+        }
+
+        function loadYears() {
+          const ticker = tickerInput.value;
+          if (ticker) {
+            fetch(`/years/${ticker}`)
+              .then((response) => response.json())
+              .then((data) => {
+                updateYearCircles(data.years);
+                document.getElementById("dynamic-content").style.display =
+                  "block"; // Show the hidden content
+              })
+              .catch((error) => {
+                console.error("Error loading years:", error);
+                alert("Failed to load years.");
+              });
+          } else {
+            alert("Please enter a ticker.");
+          }
+        }
+
+        if (loadYearsButton) {
+          loadYearsButton.addEventListener("click", loadYears);
+        }
+      });
+    </script>
+
+    {% if table %} {{ table|safe }} {% endif %}
+  </body>
+</html>
