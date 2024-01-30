@@ -1,0 +1,121 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f9; /* Light grey background */
+    color: #333; /* Dark grey text */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px; /* Maximum width of the container */
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff; /* White background for the content */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+    border-radius: 8px; /* Rounded corners for the container */
+}
+
+header {
+    font-size: 32px; /* Larger font size for the header */
+    color: #4a4a4a; /* Slightly darker text for the header */
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #e0e0e0; /* Light grey border for the header */
+    text-align: center; /* Center align the header */
+}
+
+.search-section {
+    margin-bottom: 20px;
+    text-align: center; /* Center align search section elements */
+}
+
+.search-section input,
+.search-section select {
+    width: 220px; /* Slightly larger width for inputs and selects */
+    padding: 12px;
+    margin-right: 10px; /* Increased spacing between elements */
+    border: 2px solid #ccc; /* Slightly thicker and darker border */
+    border-radius: 5px; /* Slightly more rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+}
+
+.search-section button {
+    padding: 12px 25px;
+    background-color: #5c6df4; /* Blue background for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform transition */
+    font-weight: bold; /* Bold font for buttons */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for buttons */
+}
+
+.search-section button:hover {
+    background-color: #4b59c5; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+.documents-list {
+    text-align: left; /* Align document list to the left */
+    margin-top: 20px;
+}
+
+.document-item {
+    padding: 15px;
+    background: #f9f9f9; /* Light background for each document item */
+    border: 1px solid #e0e0e0; /* Light grey border for each document item */
+    margin-bottom: 10px; /* Increased spacing between document items */
+    border-radius: 5px; /* Rounded corners for document items */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for document items */
+}
+
+.dropdown {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+    background: #ffffff; /* White background for dropdown */
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    max-height: 200px; /* Maximum height */
+    overflow-y: auto; /* Scroll for overflow */
+}
+
+.dropdown li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #f0f0f0;
+}
+
+.company-name {
+    margin-top: 10px;
+    font-size: 20px; /* Larger font size for company name */
+    color: #555; /* Darker color for emphasis */
+    text-align: center; /* Center align company name */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .search-section input,
+    .search-section select {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 10px; /* Spacing for stacked inputs */
+    }
+
+    .search-section button {
+        width: 100%;
+    }
+}
