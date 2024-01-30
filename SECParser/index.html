@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC Insights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>SEC filing RAGatouille</header>
+        <div class="search-section">
+            <input type="text" placeholder="Search by company ticker or name">
+            <select name="document-type">
+                <option value="10K">Form 10K</option>
+                <option value="10Q">Form 10Q</option>
+                <!-- Add other document types here -->
+            </select>
+            <select name="year">
+                <!-- Dynamically populate years here -->
+            </select>
+            <button>Add</button>
+        </div>
+        <div id="link-container"></div>
+        <div class="documents-list">
+            <!-- Dynamically list added documents here -->
+        </div>
+        <button>Start your conversation</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
