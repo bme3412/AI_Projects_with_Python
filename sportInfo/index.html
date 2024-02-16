@@ -1,72 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeforeTheGame</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeforeTipOff</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
     <!-- Slick Slider CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.css"/>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.css"
+    />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Slick Slider JS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"></script>
-</head>
-<body>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick.min.js"
+    ></script>
+  </head>
+  <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">BeforeTipOff</div>
-            <div class="menu">
-                <a href="#" aria-label="Concerts">Concerts</a>
-                <a href="#" aria-label="Sports">Sports</a>
-                <a href="#" aria-label="Arts & Theatre">Arts & Theatre</a>
-                <a href="#" aria-label="Family Events">Family</a>
-            </div>
-            <div class="user-actions">
-                <a href="#" aria-label="Sign In or Register">Sign In/Register</a>
-            </div>
-        </nav>
-        <div class="search-area">
-            <form method="post">
-                <div class="input-group">
-                    <input type="text" name="city_name" placeholder="Enter city name..." id="city-input" aria-label="City Name">
-                    <button type="submit" id="city-search-btn">Search City</button>
-                </div>
-                <div class="input-group">
-                    <input type="text" name="sport_name" placeholder="Enter sport name..." id="sport-input" aria-label="Sport Name">
-                    <button type="submit" id="sport-search-btn">Search Sport</button>
-                </div>
-            </form>
+      <nav class="navbar">
+        <div class="logo">BeforeTipOff</div>
+        <div class="menu">
+          <a href="#" aria-label="Concerts">Sports</a>
+          <a href="#" aria-label="Sports">Music</a>
+          <a href="#" aria-label="Arts & Theatre">Arts & Theatre</a>
+          <a href="#" aria-label="Family Events">Family</a>
         </div>
+        <div class="user-actions">
+          <a href="#" aria-label="Sign In or Register">Sign In/Register</a>
+        </div>
+      </nav>
+      <div class="search-area">
+        <form method="post">
+            <div class="input-group">
+                <input type="text" name="city_name" placeholder="Enter city name..." id="city-input" aria-label="City Name"/>
+                <button type="submit" id="city-search-btn">Search City</button>
+            </div>
+            <div class="input-group date-range-group">
+                <label for="start-date">Start Date:</label>
+                <input type="date" name="start_date" id="start-date" aria-label="Start Date"/>
+                <label for="end-date">End Date:</label>
+                <input type="date" name="end_date" id="end-date" aria-label="End Date"/>
+                <button type="submit" id="date-range-search-btn">Search Date Range</button>
+            </div>
+        </form>
+    </div>
+    
     </header>
     <main>
-        {% if city_data %}
-            <div class="city-info">
-                <h2 class="city-title">Sports Teams in {{ city_data.city }}</h2>
-                <div class="teams">
-                    {% for team in city_data.sports_teams %}
-                        <div class="team-card">
-                            <h3 class="team-name">{{ team.team_name }} ({{ team.sport }})</h3>
-                            <div class="team-details">
-                                <p><strong>League:</strong> {{ team.league }}</p>
-                                <p><strong>Average Ticket Price:</strong> {{ team.average_ticket_price }}</p>
-                                <p><strong>Season Start:</strong> {{ team.season_start }}</p>
-                                <p><strong>Playoffs Start:</strong> {{ team.playoffs_start }}</p>
-                                <p><strong>Venue:</strong> {{ team.venue.venue_name }}</p>
-                                <p><strong>Details:</strong> {{ team.venue.details }}</p>
-                                <p><strong>Address:</strong> {{ team.venue.address }}</p>
-                                <p><strong>Coordinates:</strong> {{ team.venue.geographic_coordinates.latitude }}, {{ team.venue.geographic_coordinates.longitude }}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+      {% if city_data %}
+      <div class="city-info">
+        <h2 class="city-title">Sports Teams in {{ city_data.city }}</h2>
+        <div class="teams">
+          {% for team in city_data.sports_teams %}
+          <div class="team-card">
+            <h3 class="team-name">{{ team.team_name }} ({{ team.sport }})</h3>
+            <div class="team-details">
+              <p><strong>League:</strong> {{ team.league }}</p>
+              <p>
+                <strong>Average Ticket Price:</strong> {{
+                team.average_ticket_price }}
+              </p>
+              <p><strong>Season Start:</strong> {{ team.season_start }}</p>
+              <p><strong>Playoffs Start:</strong> {{ team.playoffs_start }}</p>
+              <p><strong>Venue:</strong> {{ team.venue.venue_name }}</p>
+              <p><strong>Details:</strong> {{ team.venue.details }}</p>
+              <p><strong>Address:</strong> {{ team.venue.address }}</p>
+              <p>
+                <strong>Coordinates:</strong> {{
+                team.venue.geographic_coordinates.latitude }}, {{
+                team.venue.geographic_coordinates.longitude }}
+              </p>
             </div>
-        {% else %}
-            <p class="no-data">No data found for the specified city.</p>
-        {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <p class="no-data">No data found for the specified city.</p>
+      {% endif %}
     </main>
-    
-    
-</body>
+  </body>
 </html>
