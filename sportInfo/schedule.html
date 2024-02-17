@@ -30,7 +30,8 @@
             </div>
             <div class="input-group date-range-group">
                 <label for="start-date">Start Date:</label>
-                <input type="date" name="start_date" id="start-date" aria-label="Start Date" />
+                <input type="date" name="start_date" id="start-date" aria-label="Start Date" value="{{ start_date }}" />
+
                 <label for="end-date">End Date:</label>
                 <input type="date" name="end_date" id="end-date" aria-label="End Date" />
                 <button type="submit" id="date-range-search-btn">Filter Date Range</button>
@@ -39,8 +40,8 @@
     </div>
 </header>
 <main>
-    <h2>Schedule for {{ city_name | default('All Cities', true) }}</h2>
-    {% if city_data %}
+    
+    {% if events_data %}
     <table>
         <thead>
             <tr>
@@ -53,22 +54,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for event in city_data %}
-            <tr>
-                <td>
-                    {% if event['Date'] %}
-                        {{ event['Date'] | format_date('%Y-%m-%d') }}
-                    {% else %}
-                        Unknown Date
-                    {% endif %}
-                </td>
-                <td>{{ event['Start (ET)'] }}</td>
-                <td>{{ event['Visitor/Neutral'] }}</td>
-                <td>{{ event['Home/Neutral'] }}</td>
-                <td>{{ event['Location'] }}</td>
-                <td>{{ event['Arena'] }}</td> <!-- Displaying Arena -->
-            </tr>
-            {% endfor %}
+            {% for event in events_data %}
+<tr>
+    <td>{{ event['Date'] | format_date('%m/%d/%Y') }}</td>
+    <td>{{ event['Start (ET)'] | default('TBD') }}</td>
+    <td>{{ event['Visitor/Neutral'] }}</td>
+    <td>{{ event['Home/Neutral'] }}</td>
+    <td>{{ event['Location'] }}</td>
+    <td>{{ event['Arena'] }}</td>
+</tr>
+{% endfor %}
+
         </tbody>
     </table>
     {% else %}

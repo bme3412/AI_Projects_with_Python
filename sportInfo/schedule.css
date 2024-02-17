@@ -1,0 +1,219 @@
+body, html {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    background: #FAFAFA;
+    color: #333;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 700; /* More weight for header importance */
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #666; /* Softer color for easier reading */
+}
+
+a {
+    color: #007bff;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover, a:focus {
+    color: #0056b3;
+}
+
+
+/* Navbar Styles */
+/* Navbar Styles */
+.navbar {
+    background-color: #2C3E50; /* Dark slate for a professional appearance */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ECF0F1; /* Soft off-white for the logo to stand out subtly */
+}
+
+.navbar a {
+    color: #BDC3C7; /* Light grey for a minimalistic look */
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 0.25rem 0.5rem; /* Slight padding for better touch targets */
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    border-radius: 4px; /* Subtle rounding of edges for a modern feel */
+}
+
+.navbar a:hover {
+    color: #ECF0F1; /* Hover effect to brighten links slightly */
+    background-color: #34495E; /* Darken background on hover for contrast */
+}
+
+
+
+/* Search Area Styles */
+.search-area {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    max-width: 90%; /* Increased width for form elements */
+}
+
+.search-area form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Reduced gap for a tighter layout */
+}
+
+.input-group input, .input-group button, .date-range-group input, .date-range-group button {
+    padding: 10px 15px;
+    border: 1px solid #dee2e6; /* Lighter border for inputs */
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.search-area button {
+    background-color: #007bff; /* Updated button color for consistency */
+    color: white;
+    border: none;
+    margin-right: 140px;
+}
+
+.search-area button:hover {
+    background-color: #0056b3;
+}
+
+input:focus, button:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+
+
+/* Main Content and City Info Styles */
+main {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.city-title, .team-name {
+    color: #004085; /* Darker blue for better contrast */
+}
+
+.teams, .events {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.team-card, .event-card {
+    background: #FFF;
+    border-radius: 8px;
+    padding: 1.5rem; /* Increased padding for content breathing room */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.team-card:hover, .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.team-name {
+    color: #007BFF;
+    margin: 0 0 15px 0;
+}
+
+.team-details p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.team-details p strong {
+    color: #333;
+}
+
+.no-data {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Improvements for better readability and visual appeal */
+.team-details p {
+    color: #555; /* Slightly softer text color for better readability */
+}
+
+/* Enhance the look & feel of the venue and coordinates section */
+.team-details p:last-child {
+    font-style: italic;
+    color: #888; /* Soften the color for less critical information */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #0047AB;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e2e2e2;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navbar, .search-area, main {
+        flex-direction: column;
+    }
+
+    .navbar a {
+        margin-top: 10px; /* Ensure spacing between links in column layout */
+    }
+
+    .search-area {
+        margin: 20px 10px; /* Adjust margins for smaller screens */
+    }
+
+    .input-group, .date-range-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+
+
+
