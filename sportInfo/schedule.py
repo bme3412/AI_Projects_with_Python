@@ -1,26 +1,24 @@
-from flask import Flask, render_template, request
-from flask_cors import CORS
 import json
 import os
+from flask import Flask, render_template, request, abort
+from flask_cors import CORS
 from datetime import datetime
+
 
 app = Flask(__name__)
 CORS(app)
 
 # Custom Jinja filter for date formatting
 def format_date(value, format_string='%Y/%m/%d %H:%M'):
-    try:
-        # Ensure the timestamp is in seconds for datetime.utcfromtimestamp()
-        if isinstance(value, int):
-            # Assuming the timestamp is in milliseconds, convert to seconds
-            timestamp = value / 1000
-        else:
-            timestamp = int(value) / 1000
-        return datetime.utcfromtimestamp(timestamp).strftime(format_string)
-    except (ValueError, TypeError):
-        return "Invalid Date"
+    if isinstance(value, int):
+        # Convert milliseconds to seconds
+        timestamp = value / 1000
+    else:
+        timestamp = int(value) / 1000
+    return datetime.utcfromtimestamp(timestamp).strftime(format_string)
 
 app.jinja_env.filters['format_date'] = format_date
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -69,6 +67,8 @@ def home():
         return render_template('schedule.html', error="Could not load the schedule data", city_name=city_name, start_date=start_date)
 
     return render_template('schedule.html', events_data=events_data, city_name=city_name, start_date=start_date)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

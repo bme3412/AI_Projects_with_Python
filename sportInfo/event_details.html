@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Details</title>
+</head>
+<body>
+    <h1>Event Details</h1>
+    <p><strong>Date:</strong> {{ event['Date'] | format_date('%m/%d/%Y') }}</p>
+    <p><strong>Start (ET):</strong> {{ event['Start (ET)'] | default('TBD') }}</p>
+    <p><strong>Visitor Team:</strong> {{ event['Visitor/Neutral'] }}</p>
+    <p><strong>Home Team:</strong> {{ event['Home/Neutral'] }}</p>
+    <p><strong>Location:</strong> {{ event['Location'] }}</p>
+    <p><strong>Arena:</strong> {{ event['Arena'] }}</p>
+    <a href="/">Back to schedule</a>
+</body>
+</html>

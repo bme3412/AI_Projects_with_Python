@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/colresizable/1.6.0/colResizable-1.6.min.js" integrity="sha512-pMZ2rgWRGMywzbRAVwGk+auTREN0ldKKjACUSB4cneTgD3kn/6pu//Lxi4l8xSRkY83HENr1vztTnGDySWs0Mg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/schedule.js"></script>
 </head>
 <body>
 <header>
@@ -22,6 +25,7 @@
             <a href="#" aria-label="Sign In or Register">Sign In/Register</a>
         </div>
     </nav>
+    
     <div class="search-area">
         <form method="post">
             <div class="input-group">
@@ -31,7 +35,6 @@
             <div class="input-group date-range-group">
                 <label for="start-date">Start Date:</label>
                 <input type="date" name="start_date" id="start-date" aria-label="Start Date" value="{{ start_date }}" />
-
                 <label for="end-date">End Date:</label>
                 <input type="date" name="end_date" id="end-date" aria-label="End Date" />
                 <button type="submit" id="date-range-search-btn">Filter Date Range</button>
@@ -39,37 +42,73 @@
         </form>
     </div>
 </header>
-<main>
-    
-    {% if events_data %}
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Start (ET)</th>
-                <th>Visitor Team</th>
-                <th>Home Team</th>
-                <th>Location</th>
-                <th>Arena</th> <!-- New column header for Arena -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in events_data %}
-<tr>
-    <td>{{ event['Date'] | format_date('%m/%d/%Y') }}</td>
-    <td>{{ event['Start (ET)'] | default('TBD') }}</td>
-    <td>{{ event['Visitor/Neutral'] }}</td>
-    <td>{{ event['Home/Neutral'] }}</td>
-    <td>{{ event['Location'] }}</td>
-    <td>{{ event['Arena'] }}</td>
-</tr>
-{% endfor %}
+<div class="page-container">
+    <aside>
+        <div class="league-section basketball-leagues">
+            <h2>Basketball</h2>
+            <ul>
+                <li><a href="#">NBA</a></li>
+                <li><a href="#">EuroLeague</a></li>
+                <li><a href="#">CBA (China)</a></li>
+                <li><a href="#">NBL (Australia)</a></li>
+                <li><a href="#">Basketball Bundesliga (Germany)</a></li>
+            </ul>
+        </div>
 
-        </tbody>
-    </table>
-    {% else %}
-    <p>No events found for this city.</p>
-    {% endif %}
-</main>
+        <div class="league-section soccer-leagues">
+            <h2>Soccer</h2>
+            <ul>
+                <li><a href="#">Premier League (England)</a></li>
+                <li><a href="#">La Liga (Spain)</a></li>
+                <li><a href="#">Bundesliga (Germany)</a></li>
+                <li><a href="#">Serie A (Italy)</a></li>
+                <li><a href="#">Ligue 1 (France)</a></li>
+                <li><a href="#">Major League Soccer (USA)</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <main>
+        <div class="content-container">
+            <div class="table-container">
+                {% if events_data %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start (ET)</th>
+                            <th>Visitor Team</th>
+                            <th>Home Team</th>
+                            <th>Location</th>
+                            <th>Arena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events_data %}
+                        <tr data-event-id="{{ event['EventID'] }}">
+                            <td>{{ event['Date'] | format_date('%m/%d/%Y') }}</td>
+                            <td>{{ event['Start (ET)'] | default('TBD') }}</td>
+                            <td>{{ event['Visitor/Neutral'] }}</td>
+                            <td>{{ event['Home/Neutral'] }}</td>
+                            <td>{{ event['Location'] }}</td>
+                            <td>{{ event['Arena'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                {% else %}
+                <p>No events found for this city.</p>
+                {% endif %}
+            </div>
+            <div class="sidebar">
+                <div id="details-wrapper">
+                    <div id="event-details">Click on an event to see more details here.</div>
+                    <button id="more-details-btn" style="display: none;">Preview</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 </body>
 </html>

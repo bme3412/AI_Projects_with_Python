@@ -1,3 +1,5 @@
+
+Copy code
 body, html {
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
@@ -10,17 +12,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 1rem;
     color: #333;
-    font-weight: 700; /* More weight for header importance */
+    font-weight: 700;
 }
 
-p {
+p, a {
     margin-top: 0;
     margin-bottom: 1rem;
-    color: #666; /* Softer color for easier reading */
-}
-
-a {
-    color: #007bff;
+    color: #666;
     transition: color 0.2s ease-in-out;
 }
 
@@ -30,37 +28,78 @@ a:hover, a:focus {
 
 
 /* Navbar Styles */
-/* Navbar Styles */
 .navbar {
-    background-color: #2C3E50; /* Dark slate for a professional appearance */
+    background-color: #2C3E50;
     color: white;
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
     align-items: center;
+    padding: 1rem 2rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.navbar .logo {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ECF0F1; /* Soft off-white for the logo to stand out subtly */
+.navbar .logo, .navbar .user-actions {
+    flex: 1; /* Allows these elements to grow and take up equal space on both ends */
 }
 
-.navbar a {
-    color: #BDC3C7; /* Light grey for a minimalistic look */
+.navbar .menu {
+    display: flex;
+    justify-content: center; /* Centers the menu items */
+    flex: 2; /* Gives the menu double the space compared to logo and user-actions, emphasizing its central position */
+}
+
+.navbar .menu a {
+    color: #BDC3C7;
     text-decoration: none;
-    margin: 0 15px;
-    padding: 0.25rem 0.5rem; /* Slight padding for better touch targets */
+    margin: 0 15px; /* Adjust spacing between links as needed */
+    padding: 0.5rem;
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    border-radius: 4px; /* Subtle rounding of edges for a modern feel */
+    border-radius: 4px;
 }
 
-.navbar a:hover {
-    color: #ECF0F1; /* Hover effect to brighten links slightly */
-    background-color: #34495E; /* Darken background on hover for contrast */
+.navbar .menu a:hover {
+    color: #ECF0F1;
+    background-color: #34495E;
 }
 
+.navbar .user-actions {
+    display: flex;
+    justify-content: flex-end; /* Aligns user actions to the right */
+}
+
+
+
+/* Unified League Section Styles */
+.league-section {
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.league-section h2 {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 700;
+}
+
+.league-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.league-section li a {
+    display: block;
+    padding: 5px 0;
+    color: #007bff;
+    font-size: 0.85rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.league-section li a:hover {
+    color: #0056b3;
+    background-color: #ddd;
+    border-radius: 4px;
+}
 
 
 /* Search Area Styles */
@@ -105,115 +144,233 @@ input:focus, button:focus {
 }
 
 
+/* Sidebar and League Section Styling */
+aside {
+    background-color: #f4f4f4;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.league-section {
+    margin-bottom: 15px; /* Reduces bottom margin for less space between sections */
+}
+
+.league-section h2 {
+    font-size: 1rem; /* Slightly larger for section headings */
+    margin-bottom: 10px; /* Less space below headings */
+    font-weight: 600; /* Bold but not too heavy */
+}
+
+/* Tightening Space Between League Items */
+.league-section ul {
+    list-style: none;
+    padding: 0; /* Eliminates default padding */
+    margin: 0; /* Eliminates default margin */
+}
+
+.league-section li {
+    margin-bottom: 2px; /* Further reduces space between items */
+}
+
+.league-section li a {
+    font-size: 0.85rem;
+    color: #007bff;
+    padding: 2px 0; /* Reduces vertical padding */
+    display: block; /* Ensures the clickable area extends the full width */
+}
+
+
+/* Removes the need for a scrollbar unless necessary */
+aside {
+    max-height: auto; /* Adjusts height automatically to content */
+    overflow-y: auto; /* Shows scrollbar only when necessary */
+}
+
+
+/* Making Event Details Sticky */
+#event-details {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Adjusts to stick to the top of the sidebar */
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 2; /* Ensure it stays above other content */
+}
+
+/* "More Details" Button Styling - No changes from previous suggestion */
+#more-details-btn {
+    display: none;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+#more-details-btn:hover {
+    background-color: #0056b3;
+}
+
+#details-wrapper {
+    background-color: #ffffff; /* Optional: if you want a unified background */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px; /* Consistent with your style */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Consistent with your style */
+}
+
+/* Enhance readability for event details */
+#event-details {
+    font-size: 0.95rem; /* Slightly smaller text for more content */
+    line-height: 1.4; /* Improved line spacing for readability */
+    color: #333; /* Darker text for better contrast against the light background */
+    margin-bottom: 15px; /* Space before the "More Details" button */
+}
+
+
+
+.page-container {
+    display: flex;
+    flex-direction: row; /* Arrange children side by side */
+    margin-top: 20px; /* Space below the navbar */
+}
+
+.basketball-leagues {
+    flex: 0 0 15%; /* Assign 15% of the parent container's width to the sidebar */
+    padding: 15px; /* Adjust as needed */
+    overflow-y: auto; /* For scrolling if content is too long */
+    /* Remove min-width or adjust it to ensure content fits */
+}
+
+
+
+.basketball-leagues ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.basketball-leagues h2, .basketball-leagues li a {
+    font-size: 0.85rem; /* Consistent font size in the aside */
+}
+
+.basketball-leagues li a:hover {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
 
 /* Main Content and City Info Styles */
 main {
-    background: #FFFFFF;
+    flex: 0 0 85%; /* Adjust main content to take up the rest of the space */
     padding: 20px;
-    border-radius: 8px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: 20px auto;
 }
 
-.city-title, .team-name {
-    color: #004085; /* Darker blue for better contrast */
+.content-container {
+    display: flex;
+    flex-direction: row; /* Ensure side-by-side layout */
+    align-items: flex-start; /* Align items to the start of the container */
+    width: 100%; /* Full width of the viewport */
+    max-width: 1200px; /* Or another maximum width if preferred */
+    margin: 20px auto; /* Center the container */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.teams, .events {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+.basketball-leagues, main {
+    box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.team-card, .event-card {
-    background: #FFF;
+.table-container {
+    flex: 0 0 70%; /* Allocates 70% of the container width to the table-container */
+    padding: 20px;
+    background-color: #f8f9fa;
     border-radius: 8px;
-    padding: 1.5rem; /* Increased padding for content breathing room */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Keeps the shadow and border-radius intact */
 }
 
-.team-card:hover, .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-
-
-.team-name {
-    color: #007BFF;
-    margin: 0 0 15px 0;
-}
-
-.team-details p {
-    margin: 5px 0;
-    line-height: 1.4;
-}
-
-.team-details p strong {
-    color: #333;
-}
-
-.no-data {
-    text-align: center;
-    margin-top: 50px;
-}
-
-/* Improvements for better readability and visual appeal */
-.team-details p {
-    color: #555; /* Slightly softer text color for better readability */
-}
-
-/* Enhance the look & feel of the venue and coordinates section */
-.team-details p:last-child {
-    font-style: italic;
-    color: #888; /* Soften the color for less critical information */
+.sidebar {
+    flex: 0 0 30%;
+    padding-left: 20px;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 20px;
+    background-color: #FFFFFF;
 }
 
+/* Specific styling for table header */
 thead {
-    background-color: #0047AB;
-    color: white;
+    background-color: #0047AB; /* Bold blue background */
+    color: white; /* White text for contrast */
 }
 
 th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+/* Ensuring the header text is bold and white */
+thead th {
+    font-weight: 600; /* Bold for emphasis */
+    color: white; /* Correcting the color for readability */
 }
 
-tbody tr:hover {
-    background-color: #e2e2e2;
+/* Adjusting table font size */
+table, th, td {
+    font-size: 0.8rem; /* Reduce font size to help content fit on one line */
 }
 
+/* Additional table styles for readability with smaller font */
+th, td {
+    padding: 8px 10px; /* Adjust padding to balance the smaller font size */
+}
+
+
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+/* Sticky header for better user experience */
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
 
 @media screen and (max-width: 768px) {
-    .navbar, .search-area, main {
+    .content-container, .table-container, .sidebar {
         flex-direction: column;
+        padding-right: 0;
+        padding-left: 0;
     }
 
-    .navbar a {
-        margin-top: 10px; /* Ensure spacing between links in column layout */
-    }
-
-    .search-area {
-        margin: 20px 10px; /* Adjust margins for smaller screens */
-    }
-
-    .input-group, .date-range-group {
-        flex-direction: column;
-        align-items: stretch;
+    .basketball-leagues, main {
+        flex: 0 0 auto; /* Allows each to take up as much space as needed */
+        width: 100%; /* Full width for smaller screens */
+        min-width: 0; /* Resets min-width to prevent overflow */
     }
 }
-
-
-
-
