@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VRT Transcript Processing</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("process-form");
+        form.onsubmit = function (e) {
+          e.preventDefault(); // Prevent form from submitting the traditional way
+
+          // Show loading message
+          document.getElementById("loading").style.display = "block";
+
+          // Hide previous results, if any
+          document.getElementById("results").style.display = "none";
+
+          fetch("/process_vrt_files", {
+            method: "POST",
+            // Add any needed headers here
+            headers: {
+              "Content-Type": "application/json",
+            },
+            // Assuming you don't need to send any data for processing; adjust if necessary
+          })
+            .then((response) => response.json())
+            console.log(data)
+            .then((data) => {
+              // Hide loading message
+              document.getElementById("loading").style.display = "none";
+
+              // Show results
+              const resultsElement = document.getElementById("results");
+              resultsElement.innerHTML = ""; // Clear previous results
+              data.results.forEach((result) => {
+                const item = document.createElement("li");
+                let resultContent = `<strong>File:</strong> ${result.file}<br>`;
+
+                // Check if result.result is a string or structured data
+                if (typeof result.result === "string") {
+                  resultContent += `<strong>Result:</strong> ${result.result}`;
+                } else {
+                  // Assuming result.result is an object with keys and values
+                  for (const [key, value] of Object.entries(result.result)) {
+                    resultContent += `<strong>${key}:</strong> ${value}<br>`;
+                  }
+                }
+
+                item.innerHTML = resultContent;
+                resultsElement.appendChild(item);
+              });
+              resultsElement.style.display = "block";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              // Hide loading message
+              document.getElementById("loading").style.display = "none";
+            });
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <h1>VRT Transcript Processing</h1>
+    <form id="process-form">
+      <input type="submit" value="Process VRT Files" />
+    </form>
+
+    <div id="loading" style="display: none">
+      OpenAI model is processing, please wait...
+    </div>
+
+    <h2>Results:</h2>
+    <ul id="results" style="display: none">
+      <!-- Results will be inserted here by JavaScript -->
+    </ul>
+  </body>
+</html>
