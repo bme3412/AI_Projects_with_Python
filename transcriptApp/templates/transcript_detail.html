@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transcript Detail - {{ ticker }}</title>
+</head>
+<body>
+    <h1>Transcript Detail - {{ ticker }}</h1>
+    {% for transcript in transcripts %}
+        <div>
+            <strong>{{ transcript.speaker }}:</strong>
+            <p>{{ transcript.content }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,6 @@
+<form method="POST" action="/topics">
+    {% for ticker in tickers %}
+      <input type="checkbox" name="tickers" value="{{ ticker }}">{{ ticker }}<br>
+    {% endfor %}
+    <input type="submit" value="Extract Topics">
+  </form>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earnings Call Transcripts</title>
+</head>
+<body>
+    <h1>All Transcripts</h1>
+    <form action="/transcripts/filter" method="GET">
+        <select name="filter">
+            <option value="entire">Entire Transcript</option>
+            <option value="topics">Topic Modeling Data</option>
+        </select>
+        <button type="submit">Apply Filter</button>
+    </form>
+    <ul>
+        {% for transcript in transcripts %}
+            {% if 'symbol' in transcript %}
+                <li>
+                    <a href="/transcripts/{{ transcript.symbol }}">{{ transcript.symbol }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

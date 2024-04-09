@@ -1,0 +1,11 @@
+<form method="POST" action="/search">
+    <label for="query">Search Query:</label>
+    <input type="text" name="query" required><br>
+    
+    <label for="tickers">Select Transcripts:</label><br>
+    {% for ticker in tickers %}
+      <input type="checkbox" name="tickers" value="{{ ticker }}">{{ ticker }}<br>
+    {% endfor %}
+    
+    <input type="submit" value="Search">
+  </form>
