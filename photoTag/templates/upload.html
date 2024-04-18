@@ -1,0 +1,46 @@
+<!-- templates/upload.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload JPEG Photo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            {% if filename %}
+            <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded Photo" />
+            {% endif %}
+        </div>
+        <div class="form-container">
+            <h1>Upload JPEG Photo</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" />
+                <input type="submit" value="Upload" />
+            </form>
+        </div>
+        <div class="metadata-container">
+            {% if location and timestamp and lens_make %}
+            <p>Photo taken in {{ location }} at {{ timestamp }} on a {{ lens_make }}</p>
+            {% endif %}
+            {% if interesting_fact %}
+            <div class="interesting-fact">
+                <h3>Interesting Fact:</h3>
+                <p>{{ interesting_fact }}</p>
+            </div>
+            {% endif %}
+            {% if detected_objects %}
+            <div class="detected-objects">
+                <h3>Detected Objects:</h3>
+                <ul>
+                    {% for object in detected_objects %}
+                    <li>{{ object }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
