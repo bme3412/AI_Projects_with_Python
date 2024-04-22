@@ -18,21 +18,22 @@ This Flask application allows users to upload photos, from which it extracts EXI
 1. Clone the repository:
    ```bash
    git clone [repository-url]
-
+   ```
 2. Install the required Python packages:
-  ```bash
+  ```
   pip install -r requirements.txt
-
+  ```
 3. Set up the necessary environment variables in a .env file:
-   ```bash
+   ```
   OPENAI_API_KEY=[Your OpenAI API Key]
   AWS_ACCESS_KEY_ID=[Your AWS Access Key ID]
   AWS_SECRET_ACCESS_KEY=[Your AWS Secret Access Key]
   app_secret_key=[Your Flask App Secret Key]
-
+ ```
 4. Run the application:
-  ```bash
+  ```
   python app.py
+  ```
 
 5. Usage
 Navigate to http://localhost:5000 in your web browser to access the application. Upload a photo through the interface and view the extracted data, generated insights, and captions displayed on the photo's dedicated page.
