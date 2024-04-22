@@ -28,11 +28,11 @@ This Flask application allows users to upload photos, from which it extracts EXI
   OPENAI_API_KEY=[Your OpenAI API Key]
   AWS_ACCESS_KEY_ID=[Your AWS Access Key ID]
   AWS_SECRET_ACCESS_KEY=[Your AWS Secret Access Key]
-  app_secret_key=[Your Flask App Secret Key]
+  app_secret_key=[Your Flask App Secret Key]```
 
 4. Run the application:
   ```bash
-  python app.py
+  python app.py```
 
 5. Usage
 Navigate to http://localhost:5000 in your web browser to access the application. Upload a photo through the interface and view the extracted data, generated insights, and captions displayed on the photo's dedicated page.
