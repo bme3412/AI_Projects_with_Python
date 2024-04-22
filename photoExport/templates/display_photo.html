@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Photo Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        display: flex;
+        max-width: 1200px;
+        width: 100%;
+      }
+      .left-column {
+        flex: 1;
+        padding-right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .right-column {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      img {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      p {
+        margin: 10px 0;
+      }
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <h1>Photo Details</h1>
+        <div>
+          <p><strong>Location:</strong> {{ location }}</p>
+          <p><strong>Timestamp:</strong> {{ timestamp }}</p>
+          <p><strong>What does the image show?</strong> {{ main_subject }}</p>
+          <p><strong>Brief Caption:</strong> {{ rekognition_caption }}</p>
+          <p><strong>Interesting Fact:</strong> {{ interesting_fact }}</p>
+          <p><strong>Additional Fact:</strong> {{ additional_fact }}</p>
+          <p><strong>Caption:</strong> {{ caption }}</p>
+          <form
+            action="{{ url_for('regenerate_caption', filename=filename) }}"
+            method="POST"
+          >
+            <input type="hidden" name="location" value="{{ location }}" />
+            <input
+              type="hidden"
+              name="interesting_fact"
+              value="{{ interesting_fact }}"
+            />
+            <input type="submit" value="Regenerate Caption" />
+          </form>
+          <a href="/">Upload Another Photo</a>
+        </div>
+      </div>
+      <div class="right-column">
+        <img
+          src="{{ url_for('uploaded_file', filename=filename) }}"
+          alt="Uploaded Photo"
+        />
+      </div>
+    </div>
+  </body>
+</html>

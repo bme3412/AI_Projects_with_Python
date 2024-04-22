@@ -1,1 +1,27 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photo Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Uploader</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="photo" accept=".jpg,.jpeg">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
