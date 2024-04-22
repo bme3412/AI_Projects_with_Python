@@ -16,3 +16,6 @@
 
 ## Nvidia ChatBot
   ### ChatNVIDIA(model="mixtral_8x7b"); NVIDIAEmbeddings
+
+### Object Recognition Projects
+  ### Photo Export - https://github.com/bme3412/AI_Projects_with_Python/tree/main/photoExport
