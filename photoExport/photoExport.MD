@@ -21,8 +21,7 @@ This Flask application allows users to upload photos, from which it extracts EXI
    ```
 
 2. Install the required Python packages
-  ```pip install -r requirements.txt
-  ```
+  ```pip install -r requirements.txt```
 
 3. Set up the necessary environment variables in a .env file:
   ```OPENAI_API_KEY=[Your OpenAI API Key]
@@ -32,5 +31,4 @@ This Flask application allows users to upload photos, from which it extracts EXI
   ```
 
 4. Run the application
-  ```python app.py
-  ```
+  ```python app.py```
