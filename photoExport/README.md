@@ -23,11 +23,11 @@ This Flask application allows users to upload photos, from which it extracts EXI
   ```pip install -r requirements.txt```
 
 3. Set up the necessary environment variables in a .env file:
-   ```bash
-  OPENAI_API_KEY=[Your OpenAI API Key]
-  AWS_ACCESS_KEY_ID=[Your AWS Access Key ID]
-  AWS_SECRET_ACCESS_KEY=[Your AWS Secret Access Key]
-  app_secret_key=[Your Flask App Secret Key]```
+   ```OPENAI_API_KEY=[Your OpenAI API Key]
+   AWS_ACCESS_KEY_ID=[Your AWS Access Key ID]
+   AWS_SECRET_ACCESS_KEY=[Your AWS Secret Access Key]
+   app_secret_key=[Your Flask App Secret Key]
+   ```
   
 4. Run the application:
   ```python app.py```
