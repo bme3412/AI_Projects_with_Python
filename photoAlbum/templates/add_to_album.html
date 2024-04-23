@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to Album</title>
+    <!-- Add your styles here -->
+</head>
+<body>
+    <h1>Add Photo to Album</h1>
+    <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Photo" />
+    <form action="{{ url_for('save_to_album', filename=filename) }}" method="POST">
+        <label for="album_id">Select Album:</label>
+        <select name="album_id" id="album_id">
+            <option value="">-- Select Album --</option>
+            {% for album in albums %}
+                <option value="{{ album.album_id }}">{{ album.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="album_name">Or Create New Album:</label>
+        <input type="text" name="album_name" id="album_name" placeholder="Enter album name">
+        <br>
+        <input type="submit" value="Save to Album" />
+    </form>
+</body>
+</html>
