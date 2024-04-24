@@ -1,0 +1,46 @@
+
+<html>
+<head>
+    <title>Earnings Call Transcript - {{ symbol }}</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Earnings Call Transcript</h1>
+    <p>Symbol: {{ symbol }}</p>
+    <p>Quarter: {{ quarter }}</p>
+    <p>Year: {{ year }}</p>
+    <pre>{{ transcript }}</pre>
+    <br>
+    <h2>Processed Data:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Raw Text</th>
+                <th>Summary</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['Raw_Text'] }}</td>
+                <td>{{ row['Summary'] }}</td>
+                <td>{{ row['Category'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
