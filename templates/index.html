@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🐪🕶️ LLamaLens</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 900px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            font-size: 24px;
+        }
+        .intro-text {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            color: #555;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            border: 2px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        .example-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .example-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .example-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .example-photo.selected {
+            border: 4px solid #27CE4D;
+        }
+    </style>
+</head>
+<body>
+    <h1> 📷 Upload Photo -> 🔄 Process Image -> 💬 Generate Caption</h1>
+    <p class="intro-text">Upload a photo, or choose an example below, and LLamaLens will write an informative caption for you!</p>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="photo" accept=".jpg,.jpeg" onchange="fileSelected()">
+        <input type="hidden" name="example_photo" id="example_photo">
+        <input type="submit" value="Generate Captions">
+    </form>
+    <div class="example-container">
+        <img class="example-photo" src="{{ url_for('static', filename='easter.jpg') }}" alt="Easter Island" onclick="selectPhoto(this)">
+        <img class="example-photo" src="{{ url_for('static', filename='NYC.jpeg') }}" alt="NYC" onclick="selectPhoto(this)">
+        <img class="example-photo" src="{{ url_for('static', filename='buenosaires.jpeg') }}" alt="Buenos Aires" onclick="selectPhoto(this)">
+        <img class="example-photo" src="{{ url_for('static', filename='rio.jpg') }}" alt="Rio" onclick="selectPhoto(this)">
+        <img class="example-photo" src="{{ url_for('static', filename='buenos.jpeg') }}" alt="Another View" onclick="selectPhoto(this)">
+        <img class="example-photo" src="{{ url_for('static', filename='rapanui.jpeg') }}" alt="Another View" onclick="selectPhoto(this)">
+    </div>
+    <script>
+        function selectPhoto(element) {
+            const selectedPhoto = document.querySelector('.example-photo.selected');
+            if (selectedPhoto) {
+                selectedPhoto.classList.remove('selected');
+            }
+            element.classList.add('selected');
+            document.getElementById('example_photo').value = element.src;
+            document.querySelector('input[name="photo"]').value = '';
+        }
+
+        function fileSelected() {
+            const selectedPhoto = document.querySelector('.example-photo.selected');
+            if (selectedPhoto) {
+                selectedPhoto.classList.remove('selected');
+            }
+            document.getElementById('example_photo').value = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+boto3==1.33.13
+botocore==1.33.13
+exif==1.6.0
+Flask==2.3.2
+openai==1.23.2
+pandas==2.2.2
+Pillow==9.2.0
+Pillow==10.3.0
+python-dotenv==1.0.1
+Requests==2.31.0

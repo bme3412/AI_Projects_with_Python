@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photo Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 30px;
+        }
+        .left-column {
+            flex: 1;
+            padding-right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .right-column {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+        a {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <h1>Photo Details</h1>
+            <div>
+                <p><strong>Location:</strong> {{ location }}</p>
+                <p><strong>Date:</strong> {{ timestamp }}</p>
+                <p><strong>Brief Caption:</strong> {{ rekognition_caption }}</p>
+                <p><strong>Interesting Fact:</strong> {{ interesting_fact }}</p>
+                <p><strong>Additional Fact:</strong> {{ additional_fact }}</p>
+                <p><strong>Instagram Caption:</strong> {{ caption }}</p>
+                <form action="{{ url_for('regenerate_caption', filename=filename) }}" method="POST">
+                    <input type="hidden" name="location" value="{{ location }}" />
+                    <input type="hidden" name="interesting_fact" value="{{ interesting_fact }}" />
+                    <input type="submit" value="Regenerate Caption" />
+                </form>
+                <a href="/">Upload Another Photo</a>
+            </div>
+        </div>
+        <div class="right-column">
+            {% if filename in ['easter.jpg', 'NYC.jpeg', 'buenosaires.jpeg', 'rio.jpg','rapanui.jpeg','buenos.jpeg'] %}
+                <img src="{{ url_for('example_photo', filename=filename) }}" alt="Example Photo" />
+            {% else %}
+                <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Photo" />
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
