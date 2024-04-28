@@ -1,208 +1,208 @@
-package,First Usage Date,Usage Count
-Desktop,2024-04-25,2
-IPython,2021-10-18,71
-MeCab,2024-04-24,1
-NBA_since_2000,2021-11-06,2
-PIL,2022-05-03,24
-PyPDF2,2023-03-28,4
-__future__,2022-05-16,3
-altair,2021-11-21,20
-apex,2024-04-24,1
-ast,2023-05-30,4
-base64,2023-04-05,3
-basketball_reference_scraper,2021-09-19,101
-basketball_reference_web_scraper,2024-04-25,4
-bokeh,2021-10-02,62
-boston_valuation,2022-01-29,3
-boto3,2024-04-25,1
-bs4,2021-08-20,186
-calendar,2021-08-24,6
-camelot,2023-03-30,2
-certifi,2022-07-26,6
-chromedriver_binary,2022-10-30,2
-collections,2021-09-02,28
-contextlib,2024-04-24,3
-copy,2024-04-24,13
-country_converter,2023-06-03,2
-csv,2022-01-22,22
-cufflinks,2024-04-25,18
-cv2,2023-03-28,10
-dataclasses,2024-04-24,3
-dataframe_image,2021-10-30,144
-datasets,2023-04-23,3
-datetime,2021-09-18,366
-decimal,2023-06-03,2
-descartes,2024-04-25,1
-difflib,2024-04-24,2
-docx,2024-04-16,4
-dtale,2023-07-06,2
-enum,2022-05-04,2
-evaluate,2024-04-24,1
-faiss,2024-04-24,3
-fbprophet,2021-11-17,1
-ffn,2021-11-13,1
-financetoolkit,2023-05-31,2
-finnhub,2022-03-12,2
-flask,2024-04-25,2
-fmp_python,2023-05-31,2
-folium,2023-06-03,2
-functools,2024-04-24,1
-gc,2024-04-24,5
-geopandas,2024-04-25,2
-geopy,2023-06-03,2
-get_planet_data,2024-04-25,1
-get_sample_data,2023-08-15,2
-glob,2021-09-21,255
-"glob,",2022-07-26,28
-gmplot,2023-06-03,2
-google,2024-04-24,1
-gzip,2023-04-09,3
-hangman_words,2024-04-25,2
-holoviews,2024-04-25,2
-html,2024-04-24,1
-huggingface_hub,2024-04-24,3
-hydra,2024-04-24,1
-imp,2023-03-28,4
-import_ipynb,2021-11-06,2
-importlib,2024-04-24,1
-inspect,2024-04-25,2
-investpy,2023-07-10,4
-io,2023-07-05,2
-ipadic,2024-04-24,1
-ipykernel,2023-03-20,1
-ipywidgets,2022-11-08,16
-itables,2023-07-06,2
-itertools,2023-03-28,11
-jieba,2024-04-24,1
-joblib,2024-04-24,1
-json,2022-01-22,75
-keras,2023-05-06,2
-label_studio_ml,2024-04-24,1
-langchain,2024-04-16,4
-langchain_openai,2024-04-16,4
-librosa,2024-04-24,28
-lifelines,2024-04-25,2
-llama_index,2024-04-16,4
-logging,2024-04-24,1
-lxml,2021-10-26,8
-math,2022-01-19,34
-matplotlib,2021-08-17,757
-missingno,2021-11-01,8
-mpl_axes_aligner,2021-09-21,2
-mpl_toolkits,2024-04-25,3
-multiprocessing,2024-04-24,2
-multispeaker_data_analysis,2024-04-24,1
-mysql,2021-09-06,7
-nba_api,2021-09-19,4
-nba_py,2022-05-04,1
-nemo,2024-04-24,73
-nltk,2021-08-17,5
-numba,2024-04-25,3
-numpy,2021-08-20,786
-omegaconf,2024-04-24,54
-onnxruntime,2024-04-24,4
-openai,2022-12-21,20
-openpyxl,2024-04-25,8
-"openpyxl,",2024-04-25,2
-os,2021-08-17,353
-"os,",2024-04-24,3
-pandas,2021-08-17,1192
-pandas_datareader,2021-09-18,24
-pandas_profiling,2021-11-14,11
-pathlib,2021-08-24,23
-patsy,2024-04-25,3
-pdfplumber,2023-03-30,2
-pickle,2022-05-05,8
-plotly,2022-05-03,33
-pprint,2022-05-04,4
-prophet,2021-12-31,8
-pyaudio,2023-04-04,6
-pydot,2024-04-25,1
-pydub,2023-04-05,6
-pygal,2024-04-25,2
-pylab,2021-10-19,5
-pymysql,2022-09-24,4
-pyspark,2021-09-02,12
-pytesseract,2022-12-19,8
-pytorch_lightning,2024-04-24,31
-pytrends,2024-04-25,2
-pytube,2024-04-16,4
-pytz,2023-07-10,6
-qgrid,2021-09-21,16
-quandl,2022-05-31,12
-quantstats,2022-01-22,2
-random,2022-02-02,38
-random_walk,2024-04-25,2
-re,2021-09-18,130
-rembg,2022-11-13,4
-reportlab,2023-07-05,2
-requests,2021-08-20,250
-"requests,",2023-03-21,5
-reverse_geocoder,2023-06-03,2
-ruamel,2024-04-24,1
-sagemaker,2024-04-24,2
-scipy,2021-09-06,134
-scrapy,2024-04-25,4
-seaborn,2021-08-20,462
-sec_api,2021-10-23,4
-sec_cik_mapper,2022-11-08,1
-seedir,2022-01-21,2
-selectorlib,2022-01-22,2
-selenium,2022-01-25,8
-sentence_splitter,2024-04-24,1
-shapely,2024-04-25,2
-shutil,2022-12-22,4
-signal,2023-03-20,3
-skimage,2023-03-28,2
-sklearn,2021-09-06,313
-smtplib,2021-11-17,3
-"smtplib,",2022-11-08,2
-soundfile,2024-04-24,13
-speech_to_text_eval,2024-04-24,1
-sqlalchemy,2021-10-25,26
-sqlite3,2021-10-30,7
-squarify,2024-04-25,2
-statsmodels,2021-10-22,173
-streamlit,2021-11-22,6
-string,2023-03-12,4
-subprocess,2024-03-25,13
-svglib,2023-07-05,2
-sympy,2024-04-25,2
-sys,2021-08-17,27
-tabula,2023-03-30,4
-tabulate,2023-03-30,2
-tarfile,2022-03-28,17
-tempfile,2023-03-20,5
-tensorflow,2022-04-29,12
-termcolor,2024-04-24,1
-texterrors,2024-04-24,2
-threading,2023-06-03,2
-ticker_convert,2022-05-25,6
-tiktoken,2024-04-16,2
-time,2021-09-21,146
-tkinter,2023-06-03,9
-torch,2024-04-12,57
-torchmetrics,2024-04-24,2
-tqdm,2022-01-25,23
-typing,2023-06-03,8
-unicodedata,2022-09-08,3
-urllib,2021-08-20,46
-urllib3,2024-04-25,2
-vega_datasets,2024-04-25,6
-wandb,2024-04-24,1
-warnings,2021-09-06,233
-wave,2024-04-24,2
-webbrowser,2023-06-03,2
-wget,2024-04-24,37
-"wget,",2024-04-24,1
-whisper,2023-04-04,4
-wordninja,2024-04-24,1
-xgboost,2022-04-30,8
-xml,2023-07-08,2
-xxhash,2024-04-24,1
-yahoo_fin,2023-06-04,4
-yahoofinancials,2022-03-12,2
-yellowbrick,2021-11-14,4
-yfinance,2021-09-18,45
-youtube_dl,2021-09-12,2
-zlib,2021-10-14,4
+Package,Date_First_Used,Total_Files,Category
+Desktop,2024-04-25,2,Operating System
+IPython,2021-10-18,71,Interactive Shell
+MeCab,2024-04-24,1,Natural Language Processing
+NBA_since_2000,2021-11-06,2,Data Analysis
+PIL,2022-05-03,24,Image Processing
+PyPDF2,2023-03-28,4,PDF Processing
+future,2022-05-16,3,Compatibility
+altair,2021-11-21,20,Data Visualization
+apex,2024-04-24,1,Deep Learning
+ast,2023-05-30,4,Abstract Syntax Trees
+base64,2023-04-05,3,Encoding
+basketball_reference_scraper,2021-09-19,101,Web Scraping
+basketball_reference_web_scraper,2024-04-25,4,Web Scraping
+bokeh,2021-10-02,62,Data Visualization
+boston_valuation,2022-01-29,3,Data Analysis
+boto3,2024-04-25,1,AWS SDK
+bs4,2021-08-20,186,Web Scraping
+calendar,2021-08-24,6,Date and Time
+camelot,2023-03-30,2,PDF Table Extraction
+certifi,2022-07-26,6,SSL Certificates
+chromedriver_binary,2022-10-30,2,Web Scraping
+collections,2021-09-02,28,Data Structures
+contextlib,2024-04-24,3,Context Managers
+copy,2024-04-24,13,Object Copying
+country_converter,2023-06-03,2,Country Code Conversion
+csv,2022-01-22,22,File Format
+cufflinks,2024-04-25,18,Data Visualization
+cv2,2023-03-28,10,Computer Vision
+dataclasses,2024-04-24,3,Data Classes
+dataframe_image,2021-10-30,144,Data Visualization
+datasets,2023-04-23,3,Datasets
+datetime,2021-09-18,366,Date and Time
+decimal,2023-06-03,2,Decimal Arithmetic
+descartes,2024-04-25,1,Geometry
+difflib,2024-04-24,2,Sequence Comparison
+docx,2024-04-16,4,Word Document Processing
+dtale,2023-07-06,2,Data Visualization
+enum,2022-05-04,2,Enumerations
+evaluate,2024-04-24,1,Model Evaluation
+faiss,2024-04-24,3,Similarity Search
+fbprophet,2021-11-17,1,Time Series Forecasting
+ffn,2021-11-13,1,Financial Functions
+financetoolkit,2023-05-31,2,Financial Analysis
+finnhub,2022-03-12,2,Financial Data
+flask,2024-04-25,2,Web Framework
+fmp_python,2023-05-31,2,Financial Data
+folium,2023-06-03,2,Maps
+functools,2024-04-24,1,Higher-Order Functions
+gc,2024-04-24,5,Garbage Collection
+geopandas,2024-04-25,2,Geospatial Data Analysis
+geopy,2023-06-03,2,Geocoding
+get_planet_data,2024-04-25,1,Data Retrieval
+get_sample_data,2023-08-15,2,Data Retrieval
+glob,2021-09-21,255,File Path Matching
+"glob,",2022-07-26,28,File Path Matching
+gmplot,2023-06-03,2,Maps
+google,2024-04-24,1,Web Search
+gzip,2023-04-09,3,Data Compression
+hangman_words,2024-04-25,2,Word Game
+holoviews,2024-04-25,2,Data Visualization
+html,2024-04-24,1,Web Markup
+huggingface_hub,2024-04-24,3,Model Sharing
+hydra,2024-04-24,1,Configuration Management
+imp,2023-03-28,4,Module Import
+import_ipynb,2021-11-06,2,Jupyter Notebook Import
+importlib,2024-04-24,1,Module Import
+inspect,2024-04-25,2,Object Introspection
+investpy,2023-07-10,4,Financial Data
+io,2023-07-05,2,Input/Output
+ipadic,2024-04-24,1,Japanese Tokenizer
+ipykernel,2023-03-20,1,Jupyter Kernel
+ipywidgets,2022-11-08,16,Interactive Widgets
+itables,2023-07-06,2,Interactive Tables
+itertools,2023-03-28,11,Iteration Tools
+jieba,2024-04-24,1,Chinese Text Segmentation
+joblib,2024-04-24,1,Parallel Computing
+json,2022-01-22,75,Data Interchange Format
+keras,2023-05-06,2,Deep Learning
+label_studio_ml,2024-04-24,1,Data Labeling
+langchain,2024-04-16,4,Language Models
+langchain_openai,2024-04-16,4,Language Models
+librosa,2024-04-24,28,Audio Processing
+lifelines,2024-04-25,2,Survival Analysis
+llama_index,2024-04-16,4,Language Models
+logging,2024-04-24,1,Logging
+lxml,2021-10-26,8,XML Processing
+math,2022-01-19,34,Mathematics
+matplotlib,2021-08-17,757,Data Visualization
+missingno,2021-11-01,8,Missing Data Visualization
+mpl_axes_aligner,2021-09-21,2,Plot Alignment
+mpl_toolkits,2024-04-25,3,Matplotlib Toolkits
+multiprocessing,2024-04-24,2,Parallel Processing
+multispeaker_data_analysis,2024-04-24,1,Speech Analysis
+mysql,2021-09-06,7,Database
+nba_api,2021-09-19,4,NBA Data
+nba_py,2022-05-04,1,NBA Data
+nemo,2024-04-24,73,Speech Recognition
+nltk,2021-08-17,5,Natural Language Processing
+numba,2024-04-25,3,JIT Compilation
+numpy,2021-08-20,786,Numerical Computing
+omegaconf,2024-04-24,54,Configuration Management
+onnxruntime,2024-04-24,4,Machine Learning Inference
+openai,2022-12-21,20,Language Models
+openpyxl,2024-04-25,8,Excel Processing
+"openpyxl,",2024-04-25,2,Excel Processing
+os,2021-08-17,353,Operating System
+"os,",2024-04-24,3,Operating System
+pandas,2021-08-17,1192,Data Manipulation
+pandas_datareader,2021-09-18,24,Financial Data
+pandas_profiling,2021-11-14,11,Data Profiling
+pathlib,2021-08-24,23,File Path Manipulation
+patsy,2024-04-25,3,Statistical Modeling
+pdfplumber,2023-03-30,2,PDF Processing
+pickle,2022-05-05,8,Object Serialization
+plotly,2022-05-03,33,Data Visualization
+pprint,2022-05-04,4,Pretty Printing
+prophet,2021-12-31,8,Time Series Forecasting
+pyaudio,2023-04-04,6,Audio Input/Output
+pydot,2024-04-25,1,Graph Visualization
+pydub,2023-04-05,6,Audio Manipulation
+pygal,2024-04-25,2,Chart Generation
+pylab,2021-10-19,5,Scientific Computing
+pymysql,2022-09-24,4,MySQL Database
+pyspark,2021-09-02,12,Big Data Processing
+pytesseract,2022-12-19,8,Optical Character Recognition
+pytorch_lightning,2024-04-24,31,Deep Learning
+pytrends,2024-04-25,2,Google Trends
+pytube,2024-04-16,4,YouTube Video Download
+pytz,2023-07-10,6,Time Zone Handling
+qgrid,2021-09-21,16,Interactive Dataframes
+quandl,2022-05-31,12,Financial Data
+quantstats,2022-01-22,2,Portfolio Analysis
+random,2022-02-02,38,Random Number Generation
+random_walk,2024-04-25,2,Random Walk Simulation
+re,2021-09-18,130,Regular Expressions
+rembg,2022-11-13,4,Background Removal
+reportlab,2023-07-05,2,PDF Generation
+requests,2021-08-20,250,HTTP Requests
+"requests,",2023-03-21,5,HTTP Requests
+reverse_geocoder,2023-06-03,2,Reverse Geocoding
+ruamel,2024-04-24,1,YAML Processing
+sagemaker,2024-04-24,2,AWS Machine Learning
+scipy,2021-09-06,134,Scientific Computing
+scrapy,2024-04-25,4,Web Scraping
+seaborn,2021-08-20,462,Statistical Data Visualization
+sec_api,2021-10-23,4,SEC Filings
+sec_cik_mapper,2022-11-08,1,SEC CIK Mapping
+seedir,2022-01-21,2,Directory Listing
+selectorlib,2022-01-22,2,Web Scraping
+selenium,2022-01-25,8,Web Automation
+sentence_splitter,2024-04-24,1,Text Processing
+shapely,2024-04-25,2,Geometric Operations
+shutil,2022-12-22,4,File Operations
+signal,2023-03-20,3,Signal Processing
+skimage,2023-03-28,2,Image Processing
+sklearn,2021-09-06,313,Machine Learning
+smtplib,2021-11-17,3,Email Sending
+"smtplib,",2022-11-08,2,Email Sending
+soundfile,2024-04-24,13,Audio File I/O
+speech_to_text_eval,2024-04-24,1,Speech Recognition Evaluation
+sqlalchemy,2021-10-25,26,SQL Toolkit
+sqlite3,2021-10-30,7,SQLite Database
+squarify,2024-04-25,2,Treemap Visualization
+statsmodels,2021-10-22,173,Statistical Modeling
+streamlit,2021-11-22,6,Web App Framework
+string,2023-03-12,4,String Operations
+subprocess,2024-03-25,13,Process Management
+svglib,2023-07-05,2,SVG Rendering
+sympy,2024-04-25,2,Symbolic Mathematics
+sys,2021-08-17,27,System-Specific Parameters
+tabula,2023-03-30,4,PDF Table Extraction
+tabulate,2023-03-30,2,Pretty-Print Tabular Data
+tarfile,2022-03-28,17,Tar Archive Handling
+tempfile,2023-03-20,5,Temporary File Creation
+tensorflow,2022-04-29,12,Deep Learning
+termcolor,2024-04-24,1,ANSI Color Formatting
+texterrors,2024-04-24,2,Text Error Analysis
+threading,2023-06-03,2,Multithreading
+ticker_convert,2022-05-25,6,Stock Ticker Conversion
+tiktoken,2024-04-16,2,Text Encoding
+time,2021-09-21,146,Time Access
+tkinter,2023-06-03,9,GUI Development
+torch,2024-04-12,57,Deep Learning
+torchmetrics,2024-04-24,2,Metrics for PyTorch
+tqdm,2022-01-25,23,Progress Bars
+typing,2023-06-03,8,Type Hints
+unicodedata,2022-09-08,3,Unicode Database
+urllib,2021-08-20,46,URL Handling
+urllib3,2024-04-25,2,HTTP Client
+vega_datasets,2024-04-25,6,Vega Datasets
+wandb,2024-04-24,1,Experiment Tracking
+warnings,2021-09-06,233,Warning Control
+wave,2024-04-24,2,WAV File I/O
+webbrowser,2023-06-03,2,Web Browser Control
+wget,2024-04-24,37,File Download
+"wget,",2024-04-24,1,File Download
+whisper,2023-04-04,4,Speech Recognition
+wordninja,2024-04-24,1,Word Segmentation
+xgboost,2022-04-30,8,Gradient Boosting
+xml,2023-07-08,2,XML Processing
+xxhash,2024-04-24,1,Hashing Algorithm
+yahoo_fin,2023-06-04,4,Yahoo Finance Data
+yahoofinancials,2022-03-12,2,Yahoo Finance Data
+yellowbrick,2021-11-14,4,Machine Learning Visualization
+yfinance,2021-09-18,45,Yahoo Finance Data
+youtube_dl,2021-09-12,2,YouTube Video Download
+zlib,2021-10-14,4,Data Compression

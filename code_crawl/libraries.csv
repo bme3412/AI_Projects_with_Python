@@ -1,0 +1,208 @@
+Library,Date_First_Used,Total_Files,Category,Label
+Desktop,2024-04-25,2,Operating System,System
+IPython,2021-10-18,71,Interactive Shell,Development
+MeCab,2024-04-24,1,Natural Language Processing,Data Science
+NBA_since_2000,2021-11-06,2,Data Analysis,Data Science
+PIL,2022-05-03,24,Image Processing,Data Science
+PyPDF2,2023-03-28,4,PDF Processing,File Processing
+future,2022-05-16,3,Compatibility,Development
+altair,2021-11-21,20,Data Visualization,Data Science
+apex,2024-04-24,1,Deep Learning,Data Science
+ast,2023-05-30,4,Abstract Syntax Trees,Development
+base64,2023-04-05,3,Encoding,File Processing
+basketball_reference_scraper,2021-09-19,101,Web Scraping,Data Acquisition
+basketball_reference_web_scraper,2024-04-25,4,Web Scraping,Data Acquisition
+bokeh,2021-10-02,62,Data Visualization,Data Science
+boston_valuation,2022-01-29,3,Data Analysis,Data Science
+boto3,2024-04-25,1,AWS SDK,Cloud
+bs4,2021-08-20,186,Web Scraping,Data Acquisition
+calendar,2021-08-24,6,Date and Time,Utilities
+camelot,2023-03-30,2,PDF Table Extraction,File Processing
+certifi,2022-07-26,6,SSL Certificates,Security
+chromedriver_binary,2022-10-30,2,Web Scraping,Data Acquisition
+collections,2021-09-02,28,Data Structures,Development
+contextlib,2024-04-24,3,Context Managers,Development
+copy,2024-04-24,13,Object Copying,Development
+country_converter,2023-06-03,2,Country Code Conversion,Data Processing
+csv,2022-01-22,22,File Format,File Processing
+cufflinks,2024-04-25,18,Data Visualization,Data Science
+cv2,2023-03-28,10,Computer Vision,Data Science
+dataclasses,2024-04-24,3,Data Classes,Development
+dataframe_image,2021-10-30,144,Data Visualization,Data Science
+datasets,2023-04-23,3,Datasets,Data Science
+datetime,2021-09-18,366,Date and Time,Utilities
+decimal,2023-06-03,2,Decimal Arithmetic,Utilities
+descartes,2024-04-25,1,Geometry,Data Science
+difflib,2024-04-24,2,Sequence Comparison,Utilities
+docx,2024-04-16,4,Word Document Processing,File Processing
+dtale,2023-07-06,2,Data Visualization,Data Science
+enum,2022-05-04,2,Enumerations,Development
+evaluate,2024-04-24,1,Model Evaluation,Data Science
+faiss,2024-04-24,3,Similarity Search,Data Science
+fbprophet,2021-11-17,1,Time Series Forecasting,Data Science
+ffn,2021-11-13,1,Financial Functions,Finance
+financetoolkit,2023-05-31,2,Financial Analysis,Finance
+finnhub,2022-03-12,2,Financial Data,Finance
+flask,2024-04-25,2,Web Framework,Web Development
+fmp_python,2023-05-31,2,Financial Data,Finance
+folium,2023-06-03,2,Maps,Data Visualization
+functools,2024-04-24,1,Higher-Order Functions,Development
+gc,2024-04-24,5,Garbage Collection,System
+geopandas,2024-04-25,2,Geospatial Data Analysis,Data Science
+geopy,2023-06-03,2,Geocoding,Data Science
+get_planet_data,2024-04-25,1,Data Retrieval,Data Acquisition
+get_sample_data,2023-08-15,2,Data Retrieval,Data Acquisition
+glob,2021-09-21,255,File Path Matching,File Processing
+"glob,",2022-07-26,28,File Path Matching,File Processing
+gmplot,2023-06-03,2,Maps,Data Visualization
+google,2024-04-24,1,Web Search,Web Services
+gzip,2023-04-09,3,Data Compression,File Processing
+hangman_words,2024-04-25,2,Word Game,Entertainment
+holoviews,2024-04-25,2,Data Visualization,Data Science
+html,2024-04-24,1,Web Markup,Web Development
+huggingface_hub,2024-04-24,3,Model Sharing,Data Science
+hydra,2024-04-24,1,Configuration Management,Development
+imp,2023-03-28,4,Module Import,Development
+import_ipynb,2021-11-06,2,Jupyter Notebook Import,Development
+importlib,2024-04-24,1,Module Import,Development
+inspect,2024-04-25,2,Object Introspection,Development
+investpy,2023-07-10,4,Financial Data,Finance
+io,2023-07-05,2,Input/Output,File Processing
+ipadic,2024-04-24,1,Japanese Tokenizer,Data Processing
+ipykernel,2023-03-20,1,Jupyter Kernel,Development
+ipywidgets,2022-11-08,16,Interactive Widgets,Data Visualization
+itables,2023-07-06,2,Interactive Tables,Data Visualization
+itertools,2023-03-28,11,Iteration Tools,Development
+jieba,2024-04-24,1,Chinese Text Segmentation,Data Processing
+joblib,2024-04-24,1,Parallel Computing,Data Science
+json,2022-01-22,75,Data Interchange Format,File Processing
+keras,2023-05-06,2,Deep Learning,Data Science
+label_studio_ml,2024-04-24,1,Data Labeling,Data Science
+langchain,2024-04-16,4,Language Models,Data Science
+langchain_openai,2024-04-16,4,Language Models,Data Science
+librosa,2024-04-24,28,Audio Processing,Data Science
+lifelines,2024-04-25,2,Survival Analysis,Data Science
+llama_index,2024-04-16,4,Language Models,Data Science
+logging,2024-04-24,1,Logging,Development
+lxml,2021-10-26,8,XML Processing,File Processing
+math,2022-01-19,34,Mathematics,Utilities
+matplotlib,2021-08-17,757,Data Visualization,Data Science
+missingno,2021-11-01,8,Missing Data Visualization,Data Science
+mpl_axes_aligner,2021-09-21,2,Plot Alignment,Data Visualization
+mpl_toolkits,2024-04-25,3,Matplotlib Toolkits,Data Visualization
+multiprocessing,2024-04-24,2,Parallel Processing,Development
+multispeaker_data_analysis,2024-04-24,1,Speech Analysis,Data Science
+mysql,2021-09-06,7,Database,Data Storage
+nba_api,2021-09-19,4,NBA Data,Data Acquisition
+nba_py,2022-05-04,1,NBA Data,Data Acquisition
+nemo,2024-04-24,73,Speech Recognition,Data Science
+nltk,2021-08-17,5,Natural Language Processing,Data Science
+numba,2024-04-25,3,JIT Compilation,Development
+numpy,2021-08-20,786,Numerical Computing,Data Science
+omegaconf,2024-04-24,54,Configuration Management,Development
+onnxruntime,2024-04-24,4,Machine Learning Inference,Data Science
+openai,2022-12-21,20,Language Models,Data Science
+openpyxl,2024-04-25,8,Excel Processing,File Processing
+"openpyxl,",2024-04-25,2,Excel Processing,File Processing
+os,2021-08-17,353,Operating System,System
+"os,",2024-04-24,3,Operating System,System
+pandas,2021-08-17,1192,Data Manipulation,Data Science
+pandas_datareader,2021-09-18,24,Financial Data,Finance
+pandas_profiling,2021-11-14,11,Data Profiling,Data Science
+pathlib,2021-08-24,23,File Path Manipulation,File Processing
+patsy,2024-04-25,3,Statistical Modeling,Data Science
+pdfplumber,2023-03-30,2,PDF Processing,File Processing
+pickle,2022-05-05,8,Object Serialization,File Processing
+plotly,2022-05-03,33,Data Visualization,Data Science
+pprint,2022-05-04,4,Pretty Printing,Development
+prophet,2021-12-31,8,Time Series Forecasting,Data Science
+pyaudio,2023-04-04,6,Audio Input/Output,Multimedia
+pydot,2024-04-25,1,Graph Visualization,Data Visualization
+pydub,2023-04-05,6,Audio Manipulation,Multimedia
+pygal,2024-04-25,2,Chart Generation,Data Visualization
+pylab,2021-10-19,5,Scientific Computing,Data Science
+pymysql,2022-09-24,4,MySQL Database,Data Storage
+pyspark,2021-09-02,12,Big Data Processing,Data Science
+pytesseract,2022-12-19,8,Optical Character Recognition,Data Processing
+pytorch_lightning,2024-04-24,31,Deep Learning,Data Science
+pytrends,2024-04-25,2,Google Trends,Data Acquisition
+pytube,2024-04-16,4,YouTube Video Download,Multimedia
+pytz,2023-07-10,6,Time Zone Handling,Utilities
+qgrid,2021-09-21,16,Interactive Dataframes,Data Science
+quandl,2022-05-31,12,Financial Data,Finance
+quantstats,2022-01-22,2,Portfolio Analysis,Finance
+random,2022-02-02,38,Random Number Generation,Utilities
+random_walk,2024-04-25,2,Random Walk Simulation,Data Science
+re,2021-09-18,130,Regular Expressions,Data Processing
+rembg,2022-11-13,4,Background Removal,Data Processing
+reportlab,2023-07-05,2,PDF Generation,File Processing
+requests,2021-08-20,250,HTTP Requests,Web Services
+"requests,",2023-03-21,5,HTTP Requests,Web Services
+reverse_geocoder,2023-06-03,2,Reverse Geocoding,Data Science
+ruamel,2024-04-24,1,YAML Processing,File Processing
+sagemaker,2024-04-24,2,AWS Machine Learning,Cloud
+scipy,2021-09-06,134,Scientific Computing,Data Science
+scrapy,2024-04-25,4,Web Scraping,Data Acquisition
+seaborn,2021-08-20,462,Statistical Data Visualization,Data Science
+sec_api,2021-10-23,4,SEC Filings,Finance
+sec_cik_mapper,2022-11-08,1,SEC CIK Mapping,Finance
+seedir,2022-01-21,2,Directory Listing,File Processing
+selectorlib,2022-01-22,2,Web Scraping,Data Acquisition
+selenium,2022-01-25,8,Web Automation,Web Services
+sentence_splitter,2024-04-24,1,Text Processing,Data Processing
+shapely,2024-04-25,2,Geometric Operations,Data Science
+shutil,2022-12-22,4,File Operations,File Processing
+signal,2023-03-20,3,Signal Processing,Data Science
+skimage,2023-03-28,2,Image Processing,Data Science
+sklearn,2021-09-06,313,Machine Learning,Data Science
+smtplib,2021-11-17,3,Email Sending,Web Services
+"smtplib,",2022-11-08,2,Email Sending,Web Services
+soundfile,2024-04-24,13,Audio File I/O,Multimedia
+speech_to_text_eval,2024-04-24,1,Speech Recognition Evaluation,Data Science
+sqlalchemy,2021-10-25,26,SQL Toolkit,Data Storage
+sqlite3,2021-10-30,7,SQLite Database,Data Storage
+squarify,2024-04-25,2,Treemap Visualization,Data Visualization
+statsmodels,2021-10-22,173,Statistical Modeling,Data Science
+streamlit,2021-11-22,6,Web App Framework,Web Development
+string,2023-03-12,4,String Operations,Utilities
+subprocess,2024-03-25,13,Process Management,System
+svglib,2023-07-05,2,SVG Rendering,Data Visualization
+sympy,2024-04-25,2,Symbolic Mathematics,Data Science
+sys,2021-08-17,27,System-Specific Parameters,System
+tabula,2023-03-30,4,PDF Table Extraction,File Processing
+tabulate,2023-03-30,2,Pretty-Print Tabular Data,Data Processing
+tarfile,2022-03-28,17,Tar Archive Handling,File Processing
+tempfile,2023-03-20,5,Temporary File Creation,File Processing
+tensorflow,2022-04-29,12,Deep Learning,Data Science
+termcolor,2024-04-24,1,ANSI Color Formatting,Development
+texterrors,2024-04-24,2,Text Error Analysis,Data Processing
+threading,2023-06-03,2,Multithreading,Development
+ticker_convert,2022-05-25,6,Stock Ticker Conversion,Finance
+tiktoken,2024-04-16,2,Text Encoding,Data Processing
+time,2021-09-21,146,Time Access,Utilities
+tkinter,2023-06-03,9,GUI Development,Development
+torch,2024-04-12,57,Deep Learning,Data Science
+torchmetrics,2024-04-24,2,Metrics for PyTorch,Data Science
+tqdm,2022-01-25,23,Progress Bars,Development
+typing,2023-06-03,8,Type Hints,Development
+unicodedata,2022-09-08,3,Unicode Database,Utilities
+urllib,2021-08-20,46,URL Handling,Web Services
+urllib3,2024-04-25,2,HTTP Client,Web Services
+vega_datasets,2024-04-25,6,Vega Datasets,Data Science
+wandb,2024-04-24,1,Experiment Tracking,Data Science
+warnings,2021-09-06,233,Warning Control,Development
+wave,2024-04-24,2,WAV File I/O,Multimedia
+webbrowser,2023-06-03,2,Web Browser Control,Web Services
+wget,2024-04-24,37,File Download,Web Services
+"wget,",2024-04-24,1,File Download,Web Services
+whisper,2023-04-04,4,Speech Recognition,Data Science
+wordninja,2024-04-24,1,Word Segmentation,Data Processing
+xgboost,2022-04-30,8,Gradient Boosting,Data Science
+xml,2023-07-08,2,XML Processing,File Processing
+xxhash,2024-04-24,1,Hashing Algorithm,Utilities
+yahoo_fin,2023-06-04,4,Yahoo Finance Data,Finance
+yahoofinancials,2022-03-12,2,Yahoo Finance Data,Finance
+yellowbrick,2021-11-14,4,Machine Learning Visualization,Data Science
+yfinance,2021-09-18,45,Yahoo Finance Data,Finance
+youtube_dl,2021-09-12,2,YouTube Video Download,Multimedia
+zlib,2021-10-14,4,Data Compression,File Processing
