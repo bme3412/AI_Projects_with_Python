@@ -40,4 +40,4 @@ The `library_usage_visualization.py` script provides an interactive visualizatio
 - Configurable legend with the ability to hide/show libraries by clicking on the legend items.
 
 ## Example Output
-![Show Image](link-to-image.jpg)  # Replace `link-to-image.jpg` with the actual link to your example output image.
+![Show Image](images/bokeh_plot.jpg)  
