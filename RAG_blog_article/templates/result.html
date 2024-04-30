@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Processing Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Modern font */
+            background-color: #f4f4f4; /* Light grey background */
+            margin: 20px; /* Add some margin around the content */
+        }
+        h1, h2 {
+            color: #333; /* Dark grey color for headers */
+        }
+        p {
+            color: #666; /* Medium grey color for paragraph text */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px; /* Space above the table */
+        }
+        th, td {
+            border: 2px solid #ddd; /* Lighter border color */
+            padding: 10px 15px; /* Increased padding for table cells */
+            text-align: left;
+            background-color: #fff; /* White background for table cells */
+        }
+        th {
+            background-color: #e9e9e9; /* Light grey background for headers */
+            font-weight: bold; /* Bold font for headers */
+        }
+        a {
+            color: #0077cc; /* Blue color for links */
+            text-decoration: none; /* No underline */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>File Processing Results</h1>
+    <p>Company: {{ company_name }}</p>
+    <p>Quarter: {{ quarter }}</p>
+    <p>Year: {{ year }}</p>
+
+    <h2>Processed Chunks</h2>
+    <table>
+        <thead>
+            <tr>
+                {% for column in df.columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for _, row in df.iterrows() %}
+            <tr>
+                {% for value in row %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="{{ url_for('process_file') }}">Process another file</a></p>
+</body>
+</html>
