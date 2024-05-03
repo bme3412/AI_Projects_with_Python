@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slide Saver</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        form {
+            margin-top: 30px;
+        }
+        #summary {
+            margin-top: 30px;
+        }
+        pre {
+            white-space: pre-wrap;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+        }
+        #slideTable {
+            margin-top: 30px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Slide Saver</h1>
+        <form id="analysisForm">
+            <div class="form-group">
+                <label for="pdf_file">Upload a financial report (PDF):</label>
+                <input type="file" class="form-control-file" name="pdf_file" accept=".pdf" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze Report</button>
+        </form>
+        <div id="summary"></div>
+        <button id="showTableBtn" class="btn btn-secondary mt-3" style="display: none;">Show Slide Content</button>
+        <div id="slideTableContainer" style="display: none;">
+            <table id="slideTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Slide #</th>
+                        <th>Content</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('analysisForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            // Display loading message
+            document.getElementById('summary').innerHTML = '<p>Analyzing report, please wait...</p>';
+            document.getElementById('showTableBtn').style.display = 'none';
+            document.getElementById('slideTableContainer').style.display = 'none';
+
+            fetch('/process_pdf', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('summary').innerHTML = `
+                    <h2>Analysis Summary</h2>
+                    <p>Number of pages: ${data.num_pages}</p>
+                    <h3>Financial Metrics and Outlook</h3>
+                    <pre>${data.summary}</pre>
+                `;
+                document.getElementById('showTableBtn').style.display = 'inline-block';
+
+                // Store page content in a variable
+                var pageContent = data.page_content;
+
+                document.getElementById('showTableBtn').addEventListener('click', function() {
+                    var tableContainer = document.getElementById('slideTableContainer');
+                    var tableBody = document.querySelector('#slideTable tbody');
+
+                    if (tableContainer.style.display === 'none') {
+                        tableContainer.style.display = 'block';
+
+                        // Clear the table body
+                        tableBody.innerHTML = '';
+
+                        // Iterate over each page
+                        pageContent.forEach(function(page) {
+                            // Add the page row
+                            var pageRow = tableBody.insertRow();
+                            var pageCell = pageRow.insertCell();
+                            pageCell.colSpan = 2;
+                            pageCell.innerHTML = `<strong>Page ${page.page}</strong>`;
+
+                            // Add the content row
+                            var contentRow = tableBody.insertRow();
+                            var contentCell = contentRow.insertCell();
+                            contentCell.colSpan = 2;
+                            contentCell.innerHTML = page.content;
+                        });
+
+                        this.textContent = 'Hide Slide Content';
+                    } else {
+                        tableContainer.style.display = 'none';
+                        this.textContent = 'Show Slide Content';
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('summary').innerHTML = '<p>An error occurred while analyzing the report.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
