@@ -10,8 +10,8 @@ To set up the project, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository```
+   cd yourrepository
    
 2. **Install dependencies:**
    ```bash
-   pip install flask boto3 pdf2image Pillow nltk langchain-community```
+   pip install flask boto3 pdf2image Pillow nltk langchain-community
