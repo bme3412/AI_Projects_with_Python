@@ -1,7 +1,7 @@
 
-# Document Summarization Service
+# PDF Slide Saver
 
-This Document Summarization Service is built using Flask and utilizes several technologies including Boto3, NLTK, and the LangChain Community API to process and summarize PDF documents. The service extracts text from uploaded PDF files, analyzes it with Amazon Rekognition for OCR, and then summarizes the text using a custom LangChain summarization chain.
+PDF SLide Saver is built using Flask and utilizes several technologies including Boto3, NLTK, and the LangChain Community API to process and summarize PDF documents. The service extracts text from uploaded PDF files, analyzes it with Amazon Rekognition for OCR, and then summarizes the text using a custom LangChain summarization chain. The intended use case is to process, analyze, and extract information from investor slide decks (ex: quarterly earnings call presentations, investor day presentations, etc). The ultiamte use case is to extract content efficiently and store the information to be used for further analyis with LLMs.
 
 ## Installation
 
