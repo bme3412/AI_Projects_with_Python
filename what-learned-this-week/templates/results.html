@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>Ticker: {{ ticker }}</p>
+    <p>Query: {{ query }}</p>
+    {% if results %}
+        <ul>
+        {% for text, symbol, year, quarter, date in results %}
+            <li>
+                <p>Symbol: {{ symbol }}</p>
+                <p>Quarter: {{ quarter }}</p>
+                <p>Year: {{ year }}</p>
+                <p>Date: {{ date }}</p>
+                <p>Content: {{ text }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>
