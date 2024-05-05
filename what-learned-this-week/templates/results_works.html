@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333366; }
+        p { margin: 5px 0; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; padding: 10px; background-color: #f4f4f4; border: 1px solid #ddd; }
+        .strong { font-weight: bold; }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function showModal(content, query) {
+            var modal = document.getElementById('myModal');
+            var modalText = document.getElementById('modalText');
+            modalText.innerHTML = content.replace(new RegExp(query, 'gi'), '<span class="highlight">$&</span>');
+            modal.style.display = "block";
+        }
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>Ticker: {{ ticker }}</p>
+    <p>Query: {{ query }}</p>
+    {% if results %}
+        <ul>
+        {% for sentence, answer, speaker, symbol, year, quarter, date, text in results %}
+            <li>
+                <p>Symbol: {{ symbol }}</p>
+                <p>Quarter: Q{{ quarter }}</p>
+                <p>Year: {{ year }}</p>
+                <p>Date: {{ date }}</p>
+                <p>Speaker: {{ speaker }}</p>
+                {% if answer %}
+                    <p><strong>Question:</strong> {{ sentence }}</p>
+                    <p><strong>Answer:</strong> {{ answer }}</p>
+                {% else %}
+                    <p>Content: {{ sentence }}</p>
+                {% endif %}
+                <button onclick="showModal('{{ text | tojson | safe }}', '{{ query }}')">See Transcript</button>
+            </li>
+        {% endfor %}
+        </ul>
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p id="modalText"></p>
+            </div>
+        </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

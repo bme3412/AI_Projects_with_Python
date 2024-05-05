@@ -2,6 +2,20 @@
 <html>
 <head>
     <title>Search Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333366; }
+        p { margin: 5px 0; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; padding: 10px; background-color: #f4f4f4; border: 1px solid #ddd; }
+        .strong { font-weight: bold; }
+        .highlight { background-color: yellow; font-weight: bold; }
+        details { margin-top: 10px; }
+        summary { cursor: pointer; font-weight: bold; }
+        .context { margin-top: 10px; padding: 10px; background-color: #fff; border: 1px solid #ddd; }
+        .context p { margin: 5px 0; }
+        .context .content { font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
     <h1>Search Results</h1>
@@ -9,13 +23,31 @@
     <p>Query: {{ query }}</p>
     {% if results %}
         <ul>
-        {% for text, symbol, year, quarter, date in results %}
+        {% for sentence, answer, speaker, symbol, year, quarter, date, before_sentences, after_sentences in results %}
             <li>
                 <p>Symbol: {{ symbol }}</p>
-                <p>Quarter: {{ quarter }}</p>
+                <p>Quarter: Q{{ quarter }}</p>
                 <p>Year: {{ year }}</p>
                 <p>Date: {{ date }}</p>
-                <p>Content: {{ text }}</p>
+                <p>Speaker: {{ speaker }}</p>
+                {% if answer %}
+                    <p><strong>Question:</strong> {{ sentence }}</p>
+                    <p><strong>Answer:</strong> {{ answer }}</p>
+                {% else %}
+                    <p>Content: {{ sentence }}</p>
+                {% endif %}
+                <details>
+                    <summary>Expand</summary>
+                    <div class="context">
+                        {% for text in before_sentences %}
+                            <p>{{ text }}</p>
+                        {% endfor %}
+                        <p class="content">{{ sentence | replace(query, '<span class="highlight">' + query + '</span>') | safe }}</p>
+                        {% for text in after_sentences %}
+                            <p>{{ text }}</p>
+                        {% endfor %}
+                    </div>
+                </details>
             </li>
         {% endfor %}
         </ul>

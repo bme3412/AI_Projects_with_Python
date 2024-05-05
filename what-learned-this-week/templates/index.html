@@ -2,15 +2,23 @@
 <html>
 <head>
     <title>Transcript Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333366; }
+        label { display: block; margin-top: 10px; }
+        select, input[type="text"] { width: 200px; padding: 5px; }
+        input[type="submit"] { margin-top: 10px; padding: 5px 10px; }
+    </style>
 </head>
 <body>
     <h1>Transcript Search</h1>
     <form method="POST">
         <label for="ticker">Select Ticker:</label>
         <select name="ticker" id="ticker">
-            <option value="AAPL">AAPL</option>
-            <option value="ACN">ACN</option>
-            <!-- Add more ticker options as needed -->
+            <option value="ALL">ALL Tickers</option>
+            {% for ticker in tickers %}
+                <option value="{{ ticker }}">{{ ticker }}</option>
+            {% endfor %}
         </select>
         <br>
         <label for="query">Enter Query:</label>
