@@ -1,30 +1,434 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Transcript Search</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { color: #333366; }
-        label { display: block; margin-top: 10px; }
-        select, input[type="text"] { width: 200px; padding: 5px; }
-        input[type="submit"] { margin-top: 10px; padding: 5px 10px; }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+      }
+      h1 {
+        color: #333366;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .box {
+        width: 30%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label,
+      h2 {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: bold;
+      }
+      select,
+      input[type="text"] {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        background-color: #333366;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #27274d;
+      }
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* Change from 15% to 5% */
+        padding: 5px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .modal-container {
+        display: flex;
+      }
+      .transcript-list-container {
+        width: 30%;
+        padding-right: 20px;
+      }
+      .transcript-content-container {
+        width: 70%;
+      }
+      #transcriptContent {
+        white-space: pre-wrap;
+      }
+      .transcript-header {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #e9ecef; /* Light gray for distinction */
+        border: 1px solid #ccc; /* Subtle border for definition */
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        align-items: center; /* Vertically center the items */
+        font-size: 14px;
+        color: #333; /* Ensuring text is readable */
+      }
+
+      .transcript-header div {
+        margin-right: 10px; /* Space between metadata items */
+        flex-grow: 1; /* Allows each item to expand and take up necessary space */
+      }
+
+      .transcript-header strong {
+        font-weight: bold; /* Bold for labels to distinguish from values */
+      }
+
+      .transcript-header span {
+        font-weight: normal; /* Normal weight for values */
+        color: #555; /* Lighter color for values */
+      }
+
+      .transcript-header h3 {
+        margin: 0;
+        font-size: 18px; /* Slightly reduced size for consistency */
+        color: #333;
+        flex-basis: 100%; /* Forces title to own line */
+        padding-bottom: 8px; /* Adds space below the title */
+      }
+
+      .transcript-header p {
+        margin: 2px 0; /* Reduces vertical margin */
+        font-size: 14px; /* Ensures consistency in font size */
+        color: #666; /* Soft gray for less emphasis */
+      }
+
+      .transcript-body {
+        line-height: 1.6;
+        font-size: 16px;
+        color: #333;
+        margin-top: 5px; /* Change from 20px to 5px */
+      }
+
+      .speaker {
+        font-weight: bold;
+        color: #0056b3; /* Adjusted to a slightly darker blue for better readability */
+        display: inline-block; /* Ensures it behaves as expected inline */
+        margin-right: 5px; /* Space after speaker label */
+      }
+
+      .pagination {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .pagination button {
+        padding: 5px 10px;
+        background-color: #333366;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .pagination span {
+        margin: 0 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Transcript Search</h1>
-    <form method="POST">
-        <label for="ticker">Select Ticker:</label>
-        <select name="ticker" id="ticker">
+    <div class="container">
+      <!-- Transcripts Available -->
+      <div class="box">
+        <h2>Transcripts Available</h2>
+        <form>
+          <label for="transcript-ticker">Select Ticker:</label>
+          <select
+            id="transcript-ticker"
+            name="transcript-ticker"
+          >
             <option value="ALL">ALL Tickers</option>
             {% for ticker in tickers %}
-                <option value="{{ ticker }}">{{ ticker }}</option>
+            <option value="{{ ticker }}">{{ ticker }}</option>
             {% endfor %}
-        </select>
-        <br>
-        <label for="query">Enter Query:</label>
-        <input type="text" name="query" id="query">
-        <br>
-        <input type="submit" value="Search">
-    </form>
-</body>
+          </select>
+          <button type="button" onclick="loadTranscripts()">Load</button>
+        </form>
+        <div id="transcriptModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Available Transcripts</h2>
+            <div class="modal-container">
+              <div class="transcript-list-container">
+                <div id="transcriptList">
+                  <!-- Transcript items will be dynamically inserted here -->
+                </div>
+              </div>
+              <div class="transcript-content-container">
+                <div id="transcriptContent">
+                  <div class="transcript-header" id="transcriptMetadata">
+                    <!-- Metadata will be dynamically inserted here -->
+                  </div>
+                  <div class="transcript-body">
+                    <div id="transcriptText"></div>
+                    <!-- Pagination controls if necessary -->
+                    <div class="pagination">
+                      <button onclick="previousPage()">Previous</button>
+                      <span id="pageInfo"></span>
+                      <button onclick="nextPage()">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Example Queries -->
+      <div class="box">
+        <h2>Example Queries</h2>
+        <ul class="query-list">
+          <li>Market trends</li>
+          <li>Financial forecasts</li>
+          <li>Regulatory impacts</li>
+        </ul>
+      </div>
+      <!-- Transcript Search Form -->
+      <div class="box">
+        <form method="POST">
+          <label for="ticker">Select Ticker:</label>
+          <select name="ticker" id="ticker">
+            <option value="ALL">ALL Tickers</option>
+            {% for ticker in tickers %}
+            <option value="{{ ticker }}">{{ ticker }}</option>
+            {% endfor %}
+          </select>
+          <label for="query">Enter Query:</label>
+          <input type="text" name="query" id="query" />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
+    </div>
+    <script>
+      function loadTranscripts() {
+        var ticker = document.getElementById("transcript-ticker").value;
+        if (ticker) {
+          var transcriptList = document.getElementById("transcriptList");
+          transcriptList.innerHTML = "";
+
+          console.log("Fetching transcript files for ticker:", ticker);
+          // Make an API call to fetch the transcript files for the selected ticker
+          fetch("/get_transcripts/" + ticker)
+            .then((response) => {
+              console.log("Response received:", response);
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Transcript files data:", data);
+              var transcriptFiles = data.transcripts;
+
+              transcriptFiles.forEach(function (file) {
+                var li = document.createElement("li");
+                li.textContent = file;
+                li.addEventListener("click", function () {
+                  loadTranscriptContent(ticker, file);
+                });
+                transcriptList.appendChild(li);
+              });
+
+              openModal();
+            })
+            .catch((error) => {
+              console.error("Error fetching transcript files:", error);
+            });
+        }
+      }
+
+      function loadTranscriptContent(ticker, file) {
+        var transcriptContent = document.getElementById("transcriptContent");
+        console.log(
+          "Fetching transcript content for ticker:",
+          ticker,
+          "file:",
+          file
+        );
+
+        // Make an API call to fetch the content of the selected transcript file
+        fetch("/get_transcript_content/" + ticker + "/" + file)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Transcript content data:", data);
+            if (data.error) {
+              console.error("Error in transcript content data:", data.error);
+              transcriptContent.innerHTML =
+                "Failed to load transcript content.";
+              return;
+            }
+
+            // Update the transcript metadata and display the transcript content
+            updateMetadata(data, file); // Update metadata using the new function
+
+            let currentPage = 1;
+
+            const prevButton = document.querySelector(
+              ".pagination button:first-child"
+            );
+            const nextButton = document.querySelector(
+              ".pagination button:last-child"
+            );
+
+            prevButton.addEventListener("click", () => {
+              if (currentPage > 1) {
+                currentPage--;
+                displayTranscriptText(data.content, currentPage);
+              }
+            });
+
+            nextButton.addEventListener("click", () => {
+              const linesPerPage = 10;
+              const totalPages = Math.ceil(
+                data.content.split("\n").length / linesPerPage
+              );
+              if (currentPage < totalPages) {
+                currentPage++;
+                displayTranscriptText(data.content, currentPage);
+              }
+            });
+
+            displayTranscriptText(data.content, currentPage);
+          })
+          .catch((error) => {
+            console.error("Error fetching transcript content:", error);
+            transcriptContent.innerHTML = "Failed to load transcript content.";
+          });
+      }
+
+      function updateMetadata(data, file) {
+        const metadataDiv = document.getElementById("transcriptMetadata");
+        // Format the date to display only the date (without time)
+        const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // Update the innerHTML of the metadata div to include only the necessary information
+        metadataDiv.innerHTML = `
+        <div><strong>Symbol:</strong> <span>${data.symbol}</span></div>
+        <div><strong>Quarter:</strong> <span>Q${data.quarter}</span></div>
+        <div><strong>Year:</strong> <span>${data.year}</span></div>
+        <div><strong>Date:</strong> <span>${formattedDate}</span></div>
+    `;
+      }
+
+      function displayTranscriptText(content, currentPage) {
+        var transcriptText = document.getElementById("transcriptText");
+        transcriptText.innerHTML = ""; // Clear previous content
+
+        const linesPerPage = 10; // Number of lines to display per page
+        const startIndex = (currentPage - 1) * linesPerPage;
+        const endIndex = startIndex + linesPerPage;
+
+        content
+          .split("\n")
+          .slice(startIndex, endIndex)
+          .forEach((line) => {
+            const p = document.createElement("p");
+            const speakerMatch = line.match(/^(.+?):/);
+            if (speakerMatch) {
+              const speaker = document.createElement("span");
+              speaker.className = "speaker";
+              speaker.textContent = speakerMatch[1] + ": ";
+              p.appendChild(speaker);
+              p.appendChild(
+                document.createTextNode(line.substring(speakerMatch[0].length))
+              );
+            } else {
+              p.textContent = line; // For lines without a speaker
+            }
+            transcriptText.appendChild(p);
+          });
+
+        updatePaginationControls(
+          content.split("\n").length,
+          currentPage,
+          linesPerPage
+        );
+      }
+
+      function updatePaginationControls(totalLines, currentPage, linesPerPage) {
+        const totalPages = Math.ceil(totalLines / linesPerPage);
+        const pageInfo = document.getElementById("pageInfo");
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+        const prevButton = document.querySelector(
+          ".pagination button:first-child"
+        );
+        const nextButton = document.querySelector(
+          ".pagination button:last-child"
+        );
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+      }
+
+      function openModal() {
+        document.getElementById("transcriptModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("transcriptModal").style.display = "none";
+      }
+    </script>
+  </body>
 </html>

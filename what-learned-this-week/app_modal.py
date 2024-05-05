@@ -1,12 +1,19 @@
 # incorproate all tickers
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import glob
 import os
 import json
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.ERROR)
+logger = logging.getLogger(__name__)
+
 
 app = Flask(__name__)
 nltk.download('punkt')
@@ -71,6 +78,30 @@ def get_context_sentences(sentences, query, num_before=7, num_after=7):
 
     return context_sentences
 
+@app.route('/get_transcripts/<ticker>')
+def get_transcripts(ticker):
+    transcript_dir = f'transcripts/{ticker}'
+    transcript_files = []
+    
+    if os.path.exists(transcript_dir):
+        for file in os.listdir(transcript_dir):
+            if file.endswith('.json'):
+                transcript_files.append(file)
+    
+    return jsonify({'transcripts': transcript_files})
+
+@app.route('/get_transcript_content/<ticker>/<path:file>')
+def get_transcript_content(ticker, file):
+    transcript_path = f'transcripts/{ticker}/{file}'
+    
+    if os.path.exists(transcript_path):
+        with open(transcript_path, 'r') as f:
+            data = json.load(f)
+        return jsonify(data)
+    
+    return jsonify({'error': 'Transcript not found'}), 404
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     tickers = get_available_tickers()
@@ -92,6 +123,9 @@ def index():
                         if content_sentence == sentence:
                             results.append((sentence, answer, speaker, symbol, year, quarter, date, before_sentences, after_sentences))
                             break
+
+        # Sort results by date
+        results.sort(key=lambda x: x[6])  # Sorting by the date element in the results tuple
 
         return render_template('results.html', tickers=tickers, ticker=ticker, query=query, results=results)
 
