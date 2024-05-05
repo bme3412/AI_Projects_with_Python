@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333366;
+    }
+    p {
+      margin: 5px 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+    }
+    .strong {
+      font-weight: bold;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    details {
+      margin-top: 10px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .context {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    .context p {
+      margin: 5px 0;
+    }
+    .context .content {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .filter-buttons {
+      margin-bottom: 20px;
+    }
+    .filter-buttons button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+    .filter-buttons button.active {
+      background-color: #333366;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>Ticker: {{ ticker }}</p>
+    <p>Query: {{ query }}</p>
+  
+    <div class="filter-buttons">
+      <button data-year="2020" class="active">2020</button>
+      <button data-year="2021" class="active">2021</button>
+      <button data-year="2022" class="active">2022</button>
+      <button data-year="2023" class="active">2023</button>
+      <button data-year="2024" class="active">2024</button>
+    </div>
+    
+  
+    {% if results %}
+    <ul id="results-list">
+      {% for sentence, answer, speaker, symbol, year, quarter, date, before_sentences, after_sentences in results %}
+      <li data-year="{{ year }}">
+        <p>Symbol: {{ symbol }}</p>
+        <p>Quarter: Q{{ quarter }}</p>
+        <p>Year: {{ year }}</p>
+        <p>Date: {{ date }}</p>
+        <p>Speaker: {{ speaker }}</p>
+        {% if answer %}
+        <p><strong>Question:</strong> {{ sentence }}</p>
+        <p><strong>Answer:</strong> {{ answer }}</p>
+        {% else %}
+        <p>Content: {{ sentence }}</p>
+        {% endif %}
+        <details>
+          <summary>Expand</summary>
+          <div class="context">
+            {% for text in before_sentences %}
+            <p>{{ text }}</p>
+            {% endfor %}
+            <p class="content">{{ sentence | replace(query, '<span class="highlight">' + query + '</span>') | safe }}</p>
+            {% for text in after_sentences %}
+            <p>{{ text }}</p>
+            {% endfor %}
+          </div>
+        </details>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+  
+    <script>
+      const filterButtons = document.querySelectorAll('.filter-buttons button');
+      const resultItems = document.querySelectorAll('#results-list li');
+  
+      // Initialize an object to store the active state of each year
+      const activeYears = {
+        2020: true,
+        2021: true,
+        2022: true,
+        2023: true,
+        2024: true
+      };
+  
+      // Function to update the visibility of result items based on active years
+      function updateResultVisibility() {
+        resultItems.forEach(item => {
+          const itemYear = parseInt(item.dataset.year);
+          item.style.display = activeYears[itemYear] ? 'block' : 'none';
+        });
+      }
+  
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const year = parseInt(button.dataset.year);
+          activeYears[year] = !activeYears[year];
+          button.classList.toggle('active', activeYears[year]);
+          updateResultVisibility();
+        });
+      });
+    </script>
+  </body>
+  </html>

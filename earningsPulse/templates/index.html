@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transcript Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+      }
+      h1 {
+        color: #333366;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .box {
+        width: 30%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      label,
+      h2 {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: bold;
+      }
+      select,
+      input[type="text"] {
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      input[type="submit"] {
+        background-color: #333366;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #27274d;
+      }
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto; /* Change from 15% to 5% */
+        padding: 5px;
+        border: 1px solid #888;
+        width: 80%;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .modal-container {
+        display: flex;
+      }
+      .transcript-list-container {
+        width: 30%;
+        padding-right: 20px;
+      }
+      .transcript-content-container {
+        width: 70%;
+      }
+      #transcriptContent {
+        white-space: pre-wrap;
+      }
+      .transcript-header {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #e9ecef; /* Light gray for distinction */
+        border: 1px solid #ccc; /* Subtle border for definition */
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        align-items: center; /* Vertically center the items */
+        font-size: 14px;
+        color: #333; /* Ensuring text is readable */
+      }
+
+      .transcript-header div {
+        margin-right: 10px; /* Space between metadata items */
+        flex-grow: 1; /* Allows each item to expand and take up necessary space */
+      }
+
+      .transcript-header strong {
+        font-weight: bold; /* Bold for labels to distinguish from values */
+      }
+
+      .transcript-header span {
+        font-weight: normal; /* Normal weight for values */
+        color: #555; /* Lighter color for values */
+      }
+
+      .transcript-header h3 {
+        margin: 0;
+        font-size: 18px; /* Slightly reduced size for consistency */
+        color: #333;
+        flex-basis: 100%; /* Forces title to own line */
+        padding-bottom: 8px; /* Adds space below the title */
+      }
+
+      .transcript-header p {
+        margin: 2px 0; /* Reduces vertical margin */
+        font-size: 14px; /* Ensures consistency in font size */
+        color: #666; /* Soft gray for less emphasis */
+      }
+
+      .transcript-body {
+        line-height: 1.6;
+        font-size: 16px;
+        color: #333;
+        margin-top: 5px; /* Change from 20px to 5px */
+      }
+
+      .transcript-body p {
+        margin-bottom: 10px; /* Adds more space between transcript lines */
+      }
+
+      .speaker {
+        font-weight: bold;
+        color: #28527a; /* Changed to a more distinct blue shade for clarity */
+        margin-right: 10px; /* Increase space after speaker's name */
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center; /* Center align the pagination buttons */
+        margin-top: 20px; /* Space above pagination controls */
+      }
+
+      .pagination button {
+        margin: 0 5px; /* Space between buttons */
+        padding: 8px 16px; /* Larger buttons for easier clicking */
+        font-size: 14px; /* Larger font for visibility */
+      }
+
+      .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .pagination span {
+        font-weight: bold; /* Make page info bold */
+        margin: 0 10px;
+      }
+
+      .query-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .query-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .query-header {
+        display: flex;
+        align-items: center;
+      }
+
+      .query-ticker {
+        font-weight: bold;
+        color: #333;
+        margin-right: 5px;
+      }
+
+      .query-arrow {
+        margin: 0 5px;
+        color: #888;
+      }
+
+      .query-text {
+        color: #555;
+      }
+
+      .copy-query {
+        background-color: #333366;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .copy-query:hover {
+        background-color: #27274d;
+      }
+      .success-flag {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .success-flag.show {
+        opacity: 1;
+      }
+
+      #transcriptList {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #transcriptList li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #transcriptList li:hover {
+        background-color: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Transcript Search</h1>
+    <div class="container">
+      <!-- Transcripts Available -->
+      <div class="box">
+        <h2>Transcripts Available</h2>
+        <form>
+          <label for="transcript-ticker">Select Ticker:</label>
+          <select id="transcript-ticker" name="transcript-ticker">
+            <option value="ALL">ALL Tickers</option>
+            {% for ticker in tickers %}
+            <option value="{{ ticker }}">{{ ticker }}</option>
+            {% endfor %}
+          </select>
+          <button type="button" onclick="loadTranscripts()">Load</button>
+        </form>
+        <div id="transcriptModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Available Transcripts</h2>
+            <div class="modal-container">
+              <div class="transcript-list-container">
+                <ul id="transcriptList"></ul>
+              </div>
+              <div class="transcript-content-container">
+                <div id="transcriptContent">
+                  <div class="transcript-header" id="transcriptMetadata">
+                    <!-- Metadata will be dynamically inserted here -->
+                  </div>
+                  <div class="transcript-body">
+                    <div id="transcriptText"></div>
+                    <!-- Pagination controls if necessary -->
+                    <div class="pagination">
+                      <button onclick="previousPage()">Previous</button>
+                      <span id="pageInfo"></span>
+                      <button onclick="nextPage()">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Example Queries -->
+      <div class="box">
+        <h2>Example Queries</h2>
+        <div class="query-list">
+          <div class="query-item">
+            <div class="query-header">
+              <span class="query-ticker">AAPL</span>
+              <span class="query-arrow">&#8594;</span>
+              <span class="query-text">"iPhone"</span>
+            </div>
+            <button class="copy-query" onclick="copyQuery('AAPL', 'iPhone')">
+              Copy
+            </button>
+          </div>
+          <div class="query-item">
+            <div class="query-header">
+              <span class="query-ticker">MSFT</span>
+              <span class="query-arrow">&#8594;</span>
+              <span class="query-text">"OpenAI"</span>
+            </div>
+            <button class="copy-query" onclick="copyQuery('MSFT', 'OpenAI')">
+              Copy
+            </button>
+          </div>
+          <div class="query-item">
+            <div class="query-header">
+              <span class="query-ticker">NVDA</span>
+              <span class="query-arrow">&#8594;</span>
+              <span class="query-text">"GPU"</span>
+            </div>
+            <button class="copy-query" onclick="copyQuery('NVDA', 'GPU')">
+              Copy
+            </button>
+          </div>
+          <div class="query-item">
+            <div class="query-header">
+              <span class="query-ticker">ALL Tickers</span>
+              <span class="query-arrow">&#8594;</span>
+              <span class="query-text"
+                >"generative AI"; "inflation"; "supply chain"; "cloud
+                computing"</span
+              >
+            </div>
+
+            <button
+              class="copy-query"
+              onclick="copyQuery('[ALL Tickers]', 'generative AI, inflation, supply chain, cloud computing')"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Transcript Search Form -->
+      <div class="box">
+        <form method="POST">
+          <label for="ticker">Select Ticker:</label>
+          <select name="ticker" id="ticker">
+            <option value="ALL">ALL Tickers</option>
+            {% for ticker in tickers %}
+            <option value="{{ ticker }}">{{ ticker }}</option>
+            {% endfor %}
+          </select>
+          <label for="query">Enter Query:</label>
+          <input type="text" name="query" id="query" />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
+    </div>
+    <script>
+      function sortTranscripts(transcripts) {
+        return transcripts.sort((a, b) => {
+          const dateA = extractDateFromFilename(a.filename);
+          const dateB = extractDateFromFilename(b.filename);
+          return dateB - dateA; // Sort by date descending
+        });
+      }
+
+      function loadTranscripts() {
+        var ticker = document.getElementById("transcript-ticker").value;
+        if (ticker) {
+          var transcriptList = document.getElementById("transcriptList");
+          transcriptList.innerHTML = "";
+          console.log("Fetching transcript files for ticker:", ticker);
+          fetch("/get_transcripts/" + ticker)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Transcript files data:", data);
+              var sortedTranscripts = sortTranscripts(data.transcripts);
+              sortedTranscripts.forEach(function (transcript) {
+                var li = document.createElement("li");
+                li.textContent = transcript.readable_name;
+                li.setAttribute("data-filename", transcript.filename);
+                li.addEventListener("click", function () {
+                  loadTranscriptContent(
+                    ticker,
+                    this.getAttribute("data-filename")
+                  );
+                });
+                transcriptList.appendChild(li);
+              });
+              openModal();
+            })
+            .catch((error) => {
+              console.error("Error fetching transcript files:", error);
+            });
+        }
+      }
+
+      function extractDateFromFilename(filename) {
+        const match = filename.match(/(\d{4})-(\d{2})-(\d{2})/);
+        return match ? new Date(match[0]).getTime() : 0;
+      }
+
+      function formatTranscriptTitle(filename) {
+        const titleMatch = filename.match(
+          /(.+?)_(\d{4})_(\d{1})_(\d{4}-\d{2}-\d{2})/
+        );
+        if (titleMatch) {
+          const ticker = titleMatch[1];
+          const year = titleMatch[2];
+          const quarter = titleMatch[3];
+          const date = titleMatch[4];
+          return `${ticker} Q${quarter} ${year} (${date})`;
+        }
+        return filename;
+      }
+
+      function loadTranscriptContent(ticker, filename) {
+        console.log("Loading content for:", filename);
+        var transcriptContent = document.getElementById("transcriptContent");
+        console.log(
+          "Fetching transcript content for ticker:",
+          ticker,
+          "filename:",
+          filename
+        );
+
+        // Make an API call to fetch the content of the selected transcript file
+        fetch("/get_transcript_content/" + ticker + "/" + filename)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Transcript content data:", data);
+            if (data.error) {
+              console.error("Error in transcript content data:", data.error);
+              transcriptContent.innerHTML =
+                "Failed to load transcript content.";
+              return;
+            }
+
+            // Update the transcript metadata and display the transcript content
+            updateMetadata(data, filename); // Update metadata using the new function
+
+            let currentPage = 1;
+            const linesPerPage = 3;
+
+            const displayTranscriptText = (content, page) => {
+              var transcriptText = document.getElementById("transcriptText");
+              transcriptText.innerHTML = ""; // Clear previous content
+
+              const lines = content.split("\n");
+              const startIndex = (page - 1) * linesPerPage;
+              const endIndex = startIndex + linesPerPage;
+
+              lines.slice(startIndex, endIndex).forEach((line) => {
+                const p = document.createElement("p");
+                p.textContent = line;
+                transcriptText.appendChild(p);
+              });
+
+              updatePaginationControls(lines.length, page, linesPerPage);
+            };
+
+            const updatePaginationControls = (
+              totalLines,
+              currentPage,
+              linesPerPage
+            ) => {
+              const totalPages = Math.ceil(totalLines / linesPerPage);
+              const pageInfo = document.getElementById("pageInfo");
+              const prevButton = document.querySelector(
+                ".pagination button:first-child"
+              );
+              const nextButton = document.querySelector(
+                ".pagination button:last-child"
+              );
+
+              pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+              prevButton.disabled = currentPage === 1;
+              nextButton.disabled = currentPage >= totalPages;
+
+              prevButton.onclick = () => {
+                if (currentPage > 1) {
+                  displayTranscriptText(data.content, --currentPage);
+                }
+              };
+              nextButton.onclick = () => {
+                if (currentPage < totalPages) {
+                  displayTranscriptText(data.content, ++currentPage);
+                }
+              };
+            };
+
+            displayTranscriptText(data.content, currentPage);
+          })
+          .catch((error) => {
+            console.error("Error fetching transcript content:", error);
+            transcriptContent.innerHTML = "Failed to load transcript content.";
+          });
+      }
+
+      function updateMetadata(data, file) {
+        const metadataDiv = document.getElementById("transcriptMetadata");
+        // Format the date to display only the date (without time)
+        const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        // Update the innerHTML of the metadata div to include only the necessary information
+        metadataDiv.innerHTML = `
+        <div><strong>Symbol:</strong> <span>${data.symbol}</span></div>
+        <div><strong>Quarter:</strong> <span>Q${data.quarter}</span></div>
+        <div><strong>Year:</strong> <span>${data.year}</span></div>
+        <div><strong>Date:</strong> <span>${formattedDate}</span></div>
+    `;
+      }
+
+      function displayTranscriptText(content, currentPage) {
+        var transcriptText = document.getElementById("transcriptText");
+        transcriptText.innerHTML = ""; // Clear previous content
+
+        const linesPerPage = 2.5; // Adjusted number of lines per page for more pages
+        const startIndex = (currentPage - 1) * linesPerPage;
+        const endIndex = startIndex + linesPerPage;
+
+        const lines = content.split("\n");
+        lines.slice(startIndex, endIndex).forEach((line) => {
+          const p = document.createElement("p");
+          // Improved regex to handle extra spaces and various punctuation marks
+          const speakerMatch = line.trim().match(/^([^:]+)\s*:\s*(.+)/);
+          if (speakerMatch) {
+            const speaker = document.createElement("span");
+            speaker.className = "speaker";
+            speaker.textContent = speakerMatch[1].trim() + ": "; // Ensure speaker name is trimmed
+            p.appendChild(speaker);
+            p.appendChild(document.createTextNode(speakerMatch[2])); // Directly use matched speech text
+          } else {
+            p.textContent = line; // For lines without a speaker
+          }
+          transcriptText.appendChild(p);
+        });
+
+        updatePaginationControls(lines.length, currentPage, linesPerPage);
+      }
+
+      function updatePaginationControls(totalLines, currentPage, linesPerPage) {
+        const totalPages = Math.ceil(totalLines / linesPerPage);
+        const pageInfo = document.getElementById("pageInfo");
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+        const prevButton = document.querySelector(
+          ".pagination button:first-child"
+        );
+        const nextButton = document.querySelector(
+          ".pagination button:last-child"
+        );
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+      }
+
+      function openModal() {
+        document.getElementById("transcriptModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("transcriptModal").style.display = "none";
+      }
+
+      function copyQuery(ticker, query) {
+        const tickerInput = document.getElementById("ticker");
+        const queryInput = document.getElementById("query");
+
+        tickerInput.value = ticker;
+        queryInput.value = query;
+
+        queryInput.select();
+        queryInput.setSelectionRange(0, 99999); // For mobile devices
+
+        document.execCommand("copy");
+
+        const successFlag = document.getElementById("successFlag");
+        successFlag.classList.add("show");
+        setTimeout(function () {
+          successFlag.classList.remove("show");
+        }, 2000);
+      }
+    </script>
+    <div class="success-flag" id="successFlag">Query copied to clipboard!</div>
+  </body>
+</html>
