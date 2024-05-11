@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Stock Dashboard</title>
+    <style>
+      #stock-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 10px;
+      }
+      .stock-item {
+        padding: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+        background-color: #f8f8f8;
+        cursor: pointer;
+        transition: background-color 0.5s;
+      }
+      .popup {
+        display: none;
+        position: fixed;
+        border: 1px solid black;
+        background: white;
+        padding: 10px;
+        z-index: 1000;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+      .bar-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+      }
+      .bar-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .bar {
+        height: 20px;
+        background-color: #4caf50;
+        margin-right: 10px;
+      }
+      .bar-label {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stock-container"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById('stock-container');
+
+        fetch('/api/stocks')
+          .then(response => response.json())
+          .then(data => {
+            data.forEach(stock => {
+              const div = document.createElement('div');
+              div.className = 'stock-item';
+              div.textContent = stock.symbol; // Display ticker symbol in the grid
+
+              // Set background color based on YTD % return
+              const ytdReturn = stock.ytd_return;
+              let hue, saturation;
+              if (ytdReturn >= 0) {
+                hue = 120; // Green hue for positive returns
+                saturation = Math.min(ytdReturn * 100, 100); // Increase saturation up to 100% for higher positive returns
+              } else {
+                hue = 0; // Red hue for negative returns
+                saturation = Math.min(Math.abs(ytdReturn) * 100, 100); // Increase saturation up to 100% for lower negative returns
+              }
+              div.style.backgroundColor = `hsl(${hue}, ${saturation}%, 50%)`;
+
+              // Create a canvas element for the stock chart
+              const canvas = document.createElement('canvas');
+              canvas.width = 100;
+              canvas.height = 50;
+              div.appendChild(canvas);
+
+              // Fetch historical data and render the stock chart
+              fetch(`/api/stock-chart/${stock.symbol}`)
+                .then(response => response.json())
+                .then(chartData => {
+                  const ctx = canvas.getContext('2d');
+                  new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: chartData.timestamp,
+                      datasets: [{
+                        data: chartData.close,
+                        borderColor: 'rgba(0, 119, 204, 1)',
+                        borderWidth: 1,
+                        pointRadius: 0,
+                        lineTension: 0
+                      }]
+                    },
+                    options: {
+                      responsive: false,
+                      scales: {
+                        x: { display: false },
+                        y: { display: false }
+                      },
+                      plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                      }
+                    }
+                  });
+                });
+
+              const tooltip = document.createElement('div');
+              tooltip.className = 'popup';
+              document.body.appendChild(tooltip);
+
+              div.addEventListener('mouseover', function (event) {
+                tooltip.innerHTML = `<strong>Name:</strong> ${stock.name}<br>` +
+                  `<strong>Symbol:</strong> ${stock.symbol}<br>` +
+                  `<strong>Fund Count:</strong> ${stock.fund_count}<br>` +
+                  `<strong>YTD % Return:</strong> ${(stock.ytd_return * 100).toFixed(2)}%<br>` +
+                  `<strong>Top 10 Holdings:</strong>`;
+
+                const barChart = document.createElement('div');
+                barChart.className = 'bar-chart';
+
+                stock.Top10Funds.forEach(fund => {
+                  const barItem = document.createElement('div');
+                  barItem.className = 'bar-item';
+
+                  const bar = document.createElement('div');
+                  bar.className = 'bar';
+                  bar.style.width = `${fund.valUsd / stock.Top10Funds[0].valUsd * 100}%`;
+
+                  const barLabel = document.createElement('div');
+                  barLabel.className = 'bar-label';
+                  barLabel.textContent = `${fund.Fund}: $${fund.valUsd.toLocaleString()}`;
+
+                  barItem.appendChild(bar);
+                  barItem.appendChild(barLabel);
+                  barChart.appendChild(barItem);
+                });
+
+                tooltip.appendChild(barChart);
+                tooltip.style.display = 'block';
+                updateTooltipPosition(event);
+              });
+
+              div.addEventListener('mousemove', function (event) {
+                updateTooltipPosition(event);
+              });
+
+              div.addEventListener('mouseout', function () {
+                tooltip.style.display = 'none';
+              });
+
+              function updateTooltipPosition(event) {
+                tooltip.style.top = `${event.clientY + 15}px`;
+                tooltip.style.left = `${event.clientX + 15}px`;
+              }
+
+              container.appendChild(div);
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching stock data:', error);
+          });
+      });
+    </script>
+  </body>
+</html>

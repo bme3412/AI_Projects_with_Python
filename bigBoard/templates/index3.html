@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Stock Dashboard</title>
+    <style>
+      #stock-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 10px;
+      }
+      .stock-item {
+        padding: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        transition: background-color 0.5s;
+      }
+      .stock-item .symbol {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .stock-item .performance {
+        font-size: 14px;
+      }
+      .popup {
+        display: none;
+        position: fixed;
+        border: 1px solid black;
+        background: white;
+        padding: 10px;
+        z-index: 1000;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        
+      }
+      .popup canvas {
+        width: 100%;
+        height: 200px;
+      }
+      .bar-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+      }
+      .bar-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .bar {
+        height: 20px;
+        background-color: #4caf50;
+        margin-right: 10px;
+      }
+      .bar-label {
+        font-size: 14px;
+      }
+      .positive {
+        color: green;
+      }
+      .negative {
+        color: red;
+      }
+      .news-item {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+      }
+      .news-item strong {
+        display: inline-block;
+        width: 120px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stock-container"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("stock-container");
+        function fetchStockData() {
+          return fetch("/api/stocks")
+            .then((response) => response.json())
+            .then((data) => {
+              return data;
+            })
+            .catch((error) => {
+              console.error("Error fetching stock data:", error);
+            });
+        }
+
+        function fetchNewsData() {
+          return fetch("../stock_news_past_72_hours.csv")
+            .then((response) => response.text())
+            .then((csvData) => {
+              const lines = csvData.split("\n");
+              const newsData = {};
+
+              for (let i = 1; i < lines.length; i++) {
+                const [symbol, publishedDate, title, image, site, text, url] =
+                  lines[i].split(",");
+                if (symbol) {
+                  if (!newsData[symbol]) {
+                    newsData[symbol] = [];
+                  }
+                  newsData[symbol].push({ publishedDate, title, site, text });
+                }
+              }
+
+              return newsData;
+            });
+        }
+
+        Promise.all([fetchStockData(), fetchNewsData()])
+          .then(([stockData, newsData]) => {
+            container.innerHTML = ""; // Clear the container before updating
+
+            // Sort the data based on 1-day performance from highest to lowest
+            stockData.sort((a, b) => b.one_day_return - a.one_day_return);
+
+            stockData.forEach((stock) => {
+              const div = document.createElement("div");
+              div.className = "stock-item";
+
+              const symbolElement = document.createElement("div");
+              symbolElement.className = "symbol";
+              symbolElement.textContent = stock.symbol;
+              div.appendChild(symbolElement);
+
+              const performanceElement = document.createElement("div");
+              performanceElement.className = "performance";
+              performanceElement.textContent =
+                stock.one_day_return !== null
+                  ? `${(stock.one_day_return * 100).toFixed(2)}%`
+                  : "N/A";
+              div.appendChild(performanceElement); // Display ticker symbol in the grid
+
+              // Set background gradient based on 1-day return percentage
+              const oneDayReturn = stock.one_day_return;
+              if (oneDayReturn !== null) {
+                const percentage = Math.abs(oneDayReturn);
+                const greenComponent = oneDayReturn >= 0 ? 1 : 0;
+                const redComponent = oneDayReturn < 0 ? 1 : 0;
+                div.style.background = `linear-gradient(to right, rgba(0, 255, 0, ${greenComponent}), rgba(255, 0, 0, ${redComponent}))`;
+              }
+
+              // Create a canvas element for the stock chart
+              const canvas = document.createElement("canvas");
+              canvas.width = 100;
+              canvas.height = 50;
+              div.appendChild(canvas);
+
+              fetch(`/api/stock-chart/${stock.symbol}`)
+                  .then((response) => response.json())
+                  .then((chartData) => {
+                    if (chartData.error) {
+                      console.error(
+                        `Error fetching chart data for ${stock.symbol}:`,
+                        chartData.error
+                      );
+                      return;
+                    }
+
+                    const ctx = chartCanvas.getContext("2d");
+                    chartCanvas.width = 380;
+                    chartCanvas.height = 200;
+
+                    if (chart) {
+                      chart.destroy();
+                    }
+
+                    chart = new Chart(ctx, {
+                      type: "line",
+                      data: {
+                        labels: chartData.timestamp,
+                        datasets: [
+                          {
+                            data: chartData.close,
+                            borderColor: "rgba(0, 119, 204, 1)",
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            lineTension: 0,
+                          },
+                        ],
+                      },
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                          x: {
+                            display: true,
+                            title: {
+                              display: true,
+                              text: "Date",
+                            },
+                          },
+                          y: {
+                            display: true,
+                            title: {
+                              display: true,
+                              text: "Price",
+                            },
+                          },
+                        },
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: { enabled: true },
+                        },
+                      },
+                    });
+
+                    tooltip.style.display = "block";
+                    updateTooltipPosition(event);
+                  })
+                  .catch((error) => {
+                    console.error(
+                      `Error fetching chart data for ${stock.symbol}:`,
+                      error
+                    );
+                  });
+
+              const tooltip = document.createElement("div");
+              tooltip.className = "popup";
+              document.body.appendChild(tooltip);
+
+              const chartCanvas = document.createElement("canvas");
+              tooltip.appendChild(chartCanvas);
+
+              div.addEventListener("mouseover", function (event) {
+                const stockNews = newsData[stock.symbol] || [];
+
+                tooltip.innerHTML =
+                  `<strong>Name:</strong> ${stock.name}<br>` +
+                  `<strong>Symbol:</strong> ${stock.symbol}<br>` +
+                  `<strong>Fund Count:</strong> ${stock.fund_count}<br>` +
+                  `<strong>1-Day Return:</strong> <span class="${
+                    stock.one_day_return >= 0 ? "positive" : "negative"
+                  }">${
+                    stock.one_day_return !== null
+                      ? (stock.one_day_return * 100).toFixed(2) + "%"
+                      : "N/A"
+                  }</span><br>`;
+
+                  fetch(`/api/stock-chart/${stock.symbol}`)
+                  .then((response) => response.json())
+                  .then((chartData) => {
+                    if (chartData.error) {
+                      console.error(
+                        `Error fetching chart data for ${stock.symbol}:`,
+                        chartData.error
+                      );
+                      return;
+                    }
+
+                    const ctx = chartCanvas.getContext("2d");
+                    chartCanvas.width = 380;
+                    chartCanvas.height = 200;
+
+                    new Chart(ctx, {
+                      type: "line",
+                      data: {
+                        labels: chartData.timestamp,
+                        datasets: [
+                          {
+                            data: chartData.close,
+                            borderColor: "rgba(0, 119, 204, 1)",
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            lineTension: 0,
+                          },
+                        ],
+                      },
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                          x: {
+                            display: true,
+                            title: {
+                              display: true,
+                              text: "Date",
+                            },
+                          },
+                          y: {
+                            display: true,
+                            title: {
+                              display: true,
+                              text: "Price",
+                            },
+                          },
+                        },
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: { enabled: true },
+                        },
+                      },
+                    });
+                  })
+                  .catch((error) => {
+                    console.error(
+                      `Error fetching chart data for ${stock.symbol}:`,
+                      error
+                    );
+                  });
+                  
+
+                if (stockNews.length > 0) {
+                  const newsSection = document.createElement("div");
+                  newsSection.innerHTML = "<h3>Recent News</h3>";
+
+                  stockNews.forEach((news) => {
+                    const newsItem = document.createElement("div");
+                    newsItem.className = "news-item";
+                    newsItem.innerHTML =
+                      `<strong>Published Date:</strong> ${news.publishedDate}<br>` +
+                      `<strong>Title:</strong> ${news.title}<br>` +
+                      `<strong>Site:</strong> ${news.site}<br>` +
+                      `<strong>Summary:</strong> ${news.text}`;
+                    newsSection.appendChild(newsItem);
+                  });
+
+                  tooltip.appendChild(newsSection);
+                }
+
+                tooltip.style.display = "block";
+                updateTooltipPosition(event);
+              });
+
+              div.addEventListener("mousemove", function (event) {
+                updateTooltipPosition(event);
+              });
+
+              div.addEventListener("mouseout", function () {
+                tooltip.style.display = "none";
+              });
+
+              function updateTooltipPosition(event) {
+                tooltip.style.top = `${event.clientY + 15}px`;
+                tooltip.style.left = `${event.clientX + 15}px`;
+              }
+
+              container.appendChild(div);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+
+        // Call the fetchStockData function initially
+        fetchStockData();
+
+        // Set up auto-refresh every 20 seconds
+        setInterval(fetchStockData, 20000);
+      });
+    </script>
+  </body>
+</html>
