@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ company.get('companyName', 'Company Profile') }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <style>
+      .company-name h1 {
+        font-size: 1.5rem; /* Adjust the font size as needed */
+      }
+      .positive {
+        color: green;
+      }
+      .negative {
+        color: red;
+      }
+      .chart-labels button {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <header class="header">
+        <div class="company-info">
+          <div class="company-name">
+            <h1>{{ company.get('companyName', 'Company Profile') }}</h1>
+            <img
+              src="{{ company.get('image', '') }}"
+              alt="{{ company.get('companyName', 'No Company Selected') }}"
+              class="img-fluid"
+            />
+          </div>
+          <div class="company-buttons">
+            <a
+              href="{{ url_for('income_statement') }}"
+              id="incomeStatementButton"
+              class="btn btn-primary"
+              >Income Statement</a
+            >
+            <a
+              href="{{ url_for('balance_sheet') }}"
+              id="balanceSheetButton"
+              class="btn btn-primary"
+              >Balance Sheet</a
+            >
+            <a
+              href="{{ url_for('cash_flow') }}"
+              id="cashFlowButton"
+              class="btn btn-primary"
+              >Cash Flows</a
+            >
+            <a
+              href="{{ url_for('transcripts', symbol=company['symbol']) }}"
+              id="transcriptButton"
+              class="btn btn-primary"
+              >Transcript</a
+            >
+          </div>
+        </div>
+        <form action="/" method="get">
+          <div class="input-group">
+            <input
+              type="text"
+              name="symbol"
+              placeholder="Enter Symbol"
+              class="form-control"
+            />
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+      </header>
+
+      {% if company.get('error') %}
+      <div class="alert alert-danger mt-4">{{ company['error'] }}</div>
+      {% else %}
+      <section class="company-details">
+        <div class="detail-item">
+          <div class="value">{{ company.get('symbol', 'N/A') }}</div>
+          <div class="key">Ticker</div>
+        </div>
+        <div class="detail-item">
+          <div class="value">${{ company.get('price', 'N/A') }}</div>
+          <div class="key">Price</div>
+        </div>
+        <div class="detail-item">
+          <div
+            class="value {{ 'positive' if company.get('changes', 0) > 0 else 'negative' }}"
+          >
+            {{ company.get('changes', 'N/A') }}
+          </div>
+          <div class="key">1 Day Change</div>
+        </div>
+        <div class="detail-item">
+          <div
+            class="value {{
+              'positive' if company.get('changesPercentage', 'N/A') != 'N/A' and company.get('changesPercentage', 0) > 0 else 'negative'
+          }}"
+          >
+            {{ company.get('changesPercentage', 'N/A') | format_percentage }}
+          </div>
+          <div class="key">1 Day % Change</div>
+        </div>
+        <div class="detail-item">
+          <div class="value">${{ company.get('price', 'N/A') }}</div>
+          <div class="key">After Market Price</div>
+        </div>
+        <div class="detail-item">
+          <div class="value" id="earnings-date">
+            {{ company.get('earningsAnnouncement', 'N/A') }}
+          </div>
+          <div class="key">Next Earnings Date</div>
+        </div>
+        <div class="detail-item">
+          <div class="value">{{ company.get('sector', 'Technology') }}</div>
+          <div class="key">Sector</div>
+        </div>
+        <div class="detail-item">
+          <div class="value">
+            {{ company.get('industry', 'Software - Infrastructure') }}
+          </div>
+          <div class="key">Industry</div>
+        </div>
+      </section>
+      <div class="row mt-4">
+        <div class="col-md-8">
+          <div class="chart-container">
+            <canvas id="priceChart"></canvas>
+            <div class="chart-labels mt-2">
+              <!-- Period selection buttons -->
+              <button data-period="1d" class="btn btn-outline-primary">
+                1D
+              </button>
+              <button data-period="5d" class="btn btn-outline-primary">
+                5D
+              </button>
+              <button data-period="1mo" class="btn btn-outline-primary">
+                1M
+              </button>
+              <button data-period="3mo" class="btn btn-outline-primary">
+                3M
+              </button>
+              <button data-period="6mo" class="btn btn-outline-primary">
+                6M
+              </button>
+              <button data-period="1y" class="btn btn-outline-primary">
+                1Y
+              </button>
+              <button data-period="3y" class="btn btn-outline-primary">
+                3Y
+              </button>
+              <button data-period="5y" class="btn btn-outline-primary">
+                5Y
+              </button>
+              <button data-period="10y" class="btn btn-outline-primary">
+                10Y
+              </button>
+              <button data-period="max" class="btn btn-outline-primary">
+                MAX
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <table class="table table-bordered returns-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>2019</th>
+                <th>2020</th>
+                <th>2021</th>
+                <th>2022</th>
+                <th>2023</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="returns-row">
+                <td>Return (%)</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered key-data-table">
+            <thead>
+              <tr>
+                <th>Key Data</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Market Cap ($bn)</td>
+                <td id="market-cap">
+                  {{ company.get('marketCapitalization', 'N/A') | format_number
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>P/E Ratio</td>
+                <td id="pe-ratio">{{ company.get('peRatio', 'N/A') }}</td>
+              </tr>
+              <tr>
+                <td>Dividend Yield</td>
+                <td id="dividend-yield">
+                  {{ company.get('dividendYield', 'N/A') }}
+                </td>
+              </tr>
+              <tr>
+                <td>Return on Assets (TTM)</td>
+                <td id="roa-ttm">N/A</td>
+              </tr>
+              <tr>
+                <td>Return on Equity (TTM)</td>
+                <td id="roe-ttm">N/A</td>
+              </tr>
+              <tr>
+                <td>Return on Capital Employed (TTM)</td>
+                <td id="roce-ttm">N/A</td>
+              </tr>
+              <tr>
+                <td>Price to Sales Ratio (TTM)</td>
+                <td id="ps-ratio-ttm">N/A</td>
+              </tr>
+              <tr>
+                <td>Price to Free Cash Flows Ratio (TTM)</td>
+                <td id="pfcf-ratio-ttm">N/A</td>
+              </tr>
+              <tr>
+                <td>Enterprise Value Multiple (TTM)</td>
+                <td id="ev-multiple-ttm">N/A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tickerInput = document.querySelector('input[name="symbol"]');
+        const incomeStatementButton = document.getElementById(
+          "incomeStatementButton"
+        );
+        const balanceSheetButton =
+          document.getElementById("balanceSheetButton");
+        const cashFlowButton = document.getElementById("cashFlowButton");
+
+        function handleButtonClick(event, path) {
+          event.preventDefault();
+          const ticker =
+            tickerInput.value || "{{ company.get('symbol', 'AAPL') }}";
+          window.location.href = `${path}?ticker=${ticker}&period=annual`;
+        }
+
+        if (incomeStatementButton) {
+          incomeStatementButton.addEventListener("click", (e) =>
+            handleButtonClick(e, "/income-statement")
+          );
+        }
+
+        if (balanceSheetButton) {
+          balanceSheetButton.addEventListener("click", (e) =>
+            handleButtonClick(e, "/balance-sheet")
+          );
+        }
+
+        if (cashFlowButton) {
+          cashFlowButton.addEventListener("click", (e) =>
+            handleButtonClick(e, "/cash-flow")
+          );
+        }
+
+        const ctx = document.getElementById("priceChart").getContext("2d");
+        let priceChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: "Price",
+                data: [],
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                pointRadius: 0,
+                fill: {
+                  target: "origin",
+                  below: "rgba(75, 192, 192, 0.1)", // Area fill color below the line
+                  above: "rgba(75, 192, 192, 0.1)", // Area fill color above the line
+                },
+                tension: 0.1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  unit: "day",
+                  tooltipFormat: "MMM dd, yyyy",
+                },
+                title: {
+                  display: true,
+                  text: "Date",
+                  font: {
+                    size: 14,
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  major: {
+                    enabled: true,
+                  },
+                  font: function (context) {
+                    if (context.tick && context.tick.major) {
+                      return {
+                        weight: "bold",
+                        size: 14,
+                      };
+                    }
+                    return {};
+                  },
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Price",
+                  font: {
+                    size: 14,
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  callback: function (value) {
+                    return `$${value.toFixed(2)}`;
+                  },
+                },
+                beginAtZero: false,
+              },
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
+                labels: {
+                  font: {
+                    size: 14,
+                  },
+                },
+              },
+              tooltip: {
+                mode: "index",
+                intersect: false,
+                callbacks: {
+                  label: function (tooltipItem) {
+                    return `Price: $${tooltipItem.formattedValue}`;
+                  },
+                },
+              },
+              zoom: {
+                pan: {
+                  enabled: true,
+                  mode: "xy",
+                },
+                zoom: {
+                  wheel: {
+                    enabled: true,
+                  },
+                  pinch: {
+                    enabled: true,
+                  },
+                  mode: "xy",
+                },
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+
+        const updateChart = (period) => {
+          const symbol = "{{ company.get('symbol', 'AAPL') }}";
+          fetch(`/price-data/${symbol}?period=${period}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const chartData = data[period];
+              priceChart.data.labels = chartData.timestamps.filter(
+                (timestamp) => {
+                  const date = new Date(timestamp);
+                  const day = date.getDay();
+                  return day !== 0 && day !== 6; // Exclude weekends
+                }
+              );
+              priceChart.data.datasets[0].data = chartData.prices.filter(
+                (_, index) => {
+                  const date = new Date(chartData.timestamps[index]);
+                  const day = date.getDay();
+                  return day !== 0 && day !== 6; // Exclude weekends
+                }
+              );
+              priceChart.update();
+            });
+        };
+
+        const fetchCompanyData = (symbol) => {
+          fetch(
+            `https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=c4ad87b03bec1878bc0be6156d4472b0`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const companyData = data[0];
+
+              const earningsDateElement =
+                document.getElementById("earnings-date");
+              if (earningsDateElement) {
+                const earningsDate = new Date(companyData.earningsAnnouncement);
+                const formattedEarningsDate = earningsDate
+                  .toISOString()
+                  .split("T")[0]; // Format to YYYY-MM-DD
+                earningsDateElement.textContent = formattedEarningsDate;
+              }
+
+              const changesPercentageElement = document.getElementById(
+                "day-change-percentage"
+              );
+              if (changesPercentageElement) {
+                const changesPercentage = parseFloat(
+                  companyData.changesPercentage
+                ).toFixed(2); // Format to 2 decimal places
+                changesPercentageElement.textContent = `${changesPercentage}%`;
+                changesPercentageElement.classList.add(
+                  companyData.changesPercentage > 0 ? "positive" : "negative"
+                );
+              }
+
+              const marketCapElement = document.getElementById("market-cap");
+              if (marketCapElement) {
+                const marketCap =
+                  (companyData.marketCap / 1_000_000_000).toFixed(2) + "B";
+                marketCapElement.textContent = `$${marketCap}`;
+              }
+
+              const peRatioElement = document.getElementById("pe-ratio");
+              if (peRatioElement) {
+                peRatioElement.textContent = companyData.pe.toFixed(2);
+              }
+
+              // Fetch and calculate annualized dividend yield
+              fetch(
+                `https://financialmodelingprep.com/api/v3/stock_dividend_calendar?from=2023-01-01&to=2023-12-31&apikey=c4ad87b03bec1878bc0be6156d4472b0`
+              )
+                .then((response) => response.json())
+                .then((dividendData) => {
+                  const dividendPayments = dividendData.filter(
+                    (dividend) => dividend.symbol === symbol
+                  );
+                  const totalDividend = dividendPayments.reduce(
+                    (acc, dividend) => acc + dividend.dividend,
+                    0
+                  );
+                  const dividendYieldElement =
+                    document.getElementById("dividend-yield");
+                  if (dividendYieldElement) {
+                    const dividendYield = (
+                      (totalDividend / companyData.price) *
+                      100
+                    ).toFixed(2);
+                    dividendYieldElement.textContent = `${dividendYield}%`;
+                  }
+                });
+
+              // Fetch additional key metrics
+              fetch(
+                `https://financialmodelingprep.com/api/v4/company-outlook?symbol=${symbol}&apikey=c4ad87b03bec1878bc0be6156d4472b0`
+              )
+                .then((response) => response.json())
+                .then((outlookData) => {
+                  const metrics = outlookData.ratios[0];
+
+                  const roaElement = document.getElementById("roa-ttm");
+                  if (roaElement) {
+                    roaElement.textContent = metrics.returnOnAssetsTTM
+                      ? metrics.returnOnAssetsTTM.toFixed(2)
+                      : "N/A";
+                  }
+
+                  const roeElement = document.getElementById("roe-ttm");
+                  if (roeElement) {
+                    roeElement.textContent = metrics.returnOnEquityTTM
+                      ? metrics.returnOnEquityTTM.toFixed(2)
+                      : "N/A";
+                  }
+
+                  const roceElement = document.getElementById("roce-ttm");
+                  if (roceElement) {
+                    roceElement.textContent = metrics.returnOnCapitalEmployedTTM
+                      ? metrics.returnOnCapitalEmployedTTM.toFixed(2)
+                      : "N/A";
+                  }
+
+                  const psRatioElement =
+                    document.getElementById("ps-ratio-ttm");
+                  if (psRatioElement) {
+                    psRatioElement.textContent = metrics.priceToSalesRatioTTM
+                      ? metrics.priceToSalesRatioTTM.toFixed(2)
+                      : "N/A";
+                  }
+
+                  const pfcfRatioElement =
+                    document.getElementById("pfcf-ratio-ttm");
+                  if (pfcfRatioElement) {
+                    pfcfRatioElement.textContent =
+                      metrics.priceToFreeCashFlowsRatioTTM
+                        ? metrics.priceToFreeCashFlowsRatioTTM.toFixed(2)
+                        : "N/A";
+                  }
+
+                  const evMultipleElement =
+                    document.getElementById("ev-multiple-ttm");
+                  if (evMultipleElement) {
+                    evMultipleElement.textContent =
+                      metrics.enterpriseValueMultipleTTM
+                        ? metrics.enterpriseValueMultipleTTM.toFixed(2)
+                        : "N/A";
+                  }
+                });
+            });
+
+          fetch(
+            `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?apikey=c4ad87b03bec1878bc0be6156d4472b0`
+          )
+            .then((response) => response.json())
+            .then((returnsData) => {
+              const returnsRow = document.getElementById("returns-row");
+              returnsRow.innerHTML = "<td>Return (%)</td>";
+              const returns = {};
+
+              // Calculate annual returns
+              ["2019", "2020", "2021", "2022", "2023"].forEach((year) => {
+                const yearData = returnsData.historical.filter((data) =>
+                  data.date.startsWith(year)
+                );
+                if (yearData.length > 0) {
+                  const firstClose = yearData[yearData.length - 1].close;
+                  const lastClose = yearData[0].close;
+                  const yearReturn = (
+                    ((lastClose - firstClose) / firstClose) *
+                    100
+                  ).toFixed(2);
+                  returns[year] = yearReturn;
+                } else {
+                  returns[year] = "N/A";
+                }
+              });
+
+              ["2019", "2020", "2021", "2022", "2023"].forEach((year) => {
+                const yearReturn = returns[year] || "N/A";
+                returnsRow.innerHTML += `<td>${yearReturn}%</td>`;
+              });
+            });
+        };
+
+        document.querySelectorAll(".chart-labels button").forEach((button) => {
+          button.addEventListener("click", () => {
+            const period = button.getAttribute("data-period");
+            updateChart(period);
+          });
+        });
+
+        // Initial load for default period (e.g., 1 month) and company data
+        updateChart("1mo");
+        fetchCompanyData("{{ company.get('symbol', 'AAPL') }}");
+      });
+    </script>
+  </body>
+</html>

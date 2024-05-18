@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Prompts for {{ symbol }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-size: 1.2rem;
+            color: #555;
+        }
+        input[type="text"], textarea, select, button {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .result pre {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Generate LLM Prompts for {{ symbol }}</h2>
+        <form method="post" action="/llm?symbol={{ symbol }}">
+            <label for="preset-prompt">Select a Preset Prompt:</label>
+            <select id="preset-prompt" onchange="setPrompt()">
+                <option value="">--Select a Preset Prompt--</option>
+                {% for preset in preset_prompts %}
+                    <option value="{{ preset }}">{{ preset }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="custom-prompt">Or Enter Custom Prompt:</label>
+            <textarea id="custom-prompt" name="prompt" rows="5"></textarea>
+
+            <button type="submit">Generate</button>
+        </form>
+
+        {% if generated_text %}
+            <div class="result">
+                <h3>Generated Text:</h3>
+                <pre>{{ generated_text }}</pre>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function setPrompt() {
+            const presetSelect = document.getElementById('preset-prompt');
+            const customPrompt = document.getElementById('custom-prompt');
+            customPrompt.value = presetSelect.value;
+        }
+    </script>
+</body>
+</html>

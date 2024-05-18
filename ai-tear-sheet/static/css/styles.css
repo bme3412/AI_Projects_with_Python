@@ -1,0 +1,146 @@
+body {
+    background-color: #f8f9fa;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .company-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .company-name {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .company-name h1 {
+    margin: 0;
+  }
+  
+  .company-name img {
+    max-width: 50px;
+    margin-left: 10px;
+  }
+  
+  .company-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .company-buttons button {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  .header form {
+    margin-top: 10px;
+  }
+  
+  .company-details {
+    margin-bottom: 20px;
+  }
+  
+  .company-details .detail-item {
+    display: inline-block;
+    margin-right: 20px;
+    text-align: center;
+  }
+  
+  .company-details .detail-item .value {
+    font-weight: bold;
+  }
+  
+  .company-details .detail-item .key {
+    font-weight: normal;
+  }
+  
+  .company-details .positive {
+    color: green;
+  }
+  
+  .company-details .negative {
+    color: red;
+  }
+  
+  .company-logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .company-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .company-info h2 {
+    margin-bottom: 20px;
+  }
+  
+  .company-info table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .company-info th, .company-info td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .company-info th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .returns-table,
+  .price-target-table,
+  .consensus-table {
+    margin-top: 40px;
+  }
+  
+  .returns-table th,
+  .price-target-table th,
+  .consensus-table th {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .chart-container {
+    height: 60vh;
+    width: 60%;
+    margin: 10px auto;
+    padding-top: 10px;
+    padding-left: 0;
+  }
+  
+  .chart-labels {
+    display: flex;
+    justify-content: start;
+    background-color: transparent;
+    padding: 10px 0;
+  }
+  
+  .chart-labels button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .chart-labels button:hover {
+    background-color: #0056b3;
+  }
+  

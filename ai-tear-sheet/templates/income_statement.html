@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Statement</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #6c757d;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            flex-wrap: wrap;
+        }
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .company-name {
+            margin-bottom: 10px;
+        }
+        .company-name h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .company-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .company-buttons button {
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .company-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .header form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .header form input[type="text"],
+        .header form select,
+        .header form button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .header form button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        .header form button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #d3d3d3;
+            color: black;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        tr:hover td {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-info">
+                <div class="company-name">
+                    <h1>Income Statement for {{ ticker }}</h1>
+                </div>
+                <div class="company-buttons">
+                    <button onclick="location.href='/income-statement?ticker={{ ticker }}'">Income Statement</button>
+                    <button onclick="location.href='/balance-sheet?ticker={{ ticker }}'">Balance Sheet</button>
+                    <button onclick="location.href='/cash-flow?ticker={{ ticker }}'">Cash Flow Statement</button>
+                    <!-- Add more buttons as needed -->
+                </div>
+            </div>
+            <form action="/income-statement" method="get">
+                <input type="text" name="ticker" placeholder="Enter ticker" value="{{ ticker }}">
+                <select name="period">
+                    <option value="annual" {% if period == 'annual' %}selected{% endif %}>Annual</option>
+                    <option value="quarter" {% if period == 'quarter' %}selected{% endif %}>Quarterly</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Line Item</th>
+                    {% for statement in income_statements %}
+                        <th>{{ statement.formatted_date }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, label in {
+                    'revenue': 'Revenue ($ bn)', 'costOfRevenue': 'Cost of Revenue', 'grossProfit': 'Gross Profit', 
+                    'grossProfitRatio': 'Gross Margin %', 'researchAndDevelopmentExpenses': 'Research & Development Expenses', 
+                    'sellingGeneralAndAdministrativeExpenses': 'Selling, General & Admin Expenses', 'otherExpenses': 'Other Expenses', 
+                    'operatingExpenses': 'Total Operating Expenses', 'operatingIncome': 'Operating Income', 
+                    'operatingIncomeRatio': 'Operating Income Margin %', 'interestIncome': 'Interest Income', 
+                    'interestExpense': 'Interest Expense', 'incomeBeforeTax': 'Income Before Taxes', 'incomeTaxExpense': 'Income Taxes', 
+                    'netIncome': 'Net Income', 'eps': 'EPS', 'epsdiluted': 'EPS, Diluted', 
+                    'weightedAverageShsOut': 'Wgt. Avg Shares Outstanding', 'weightedAverageShsOutDil': 'Wgt. Avg Diluted Shares Outstanding'
+                }.items() %}
+                    <tr>
+                        <td>{{ label }}</td>
+                        {% for statement in income_statements %}
+                            <td>
+                                {% if statement[key] is not none %}
+                                    {% if key in ['revenue', 'costOfRevenue', 'grossProfit', 'researchAndDevelopmentExpenses', 'sellingGeneralAndAdministrativeExpenses', 'otherExpenses', 'operatingExpenses', 'operatingIncome', 'interestIncome', 'interestExpense', 'incomeBeforeTax', 'incomeTaxExpense', 'netIncome'] %}
+                                        ${{ (statement[key] / 1000000) | number_format }}
+                                    {% elif key in ['grossProfitRatio', 'operatingIncomeRatio'] %}
+                                        {{ (statement[key] * 100) | round(2) }}%
+                                    {% elif key in ['eps', 'epsdiluted'] %}
+                                        {{ statement[key] | round(2) }}
+                                    {% else %}
+                                        {{ statement[key] | number_format }}
+                                    {% endif %}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
