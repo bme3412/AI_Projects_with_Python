@@ -64,11 +64,11 @@ Contributions to this project are welcome. Please fork the repository and create
 
 ## License
 
-[Specify your license here, e.g., MIT, GPL, etc.]
+
 
 ## Contact
 
-If you have any questions or feedback, please contact [Your Name] at [your email].
+
 
 ## Acknowledgements
 
