@@ -1,0 +1,29 @@
+Rank,Player,SACK,INT,FR,FF,DEF TD,SFTY,SPC TD,G,FPTS,FPTS/G,ROST,Team,Week,Year
+1,Washington Commanders,5,2,0,0,1,0,0,1,19.0,19.0,8.1%,WAS,11,2022
+2,Baltimore Ravens,4,2,1,1,0,0,0,1,17.0,17.0,86.2%,BAL,11,2022
+3,New England Patriots,4,0,0,0,0,0,1,1,17.0,17.0,13.6%,NE,11,2022
+4,Dallas Cowboys,7,0,1,1,0,0,0,1,16.0,16.0,92.7%,DAL,11,2022
+5,Atlanta Falcons,4,1,0,0,0,0,1,1,12.0,12.0,16.7%,ATL,11,2022
+6,Detroit Lions,2,2,1,1,0,0,0,1,11.0,11.0,38.6%,DET,11,2022
+7,San Francisco 49ers,3,2,0,1,0,0,0,1,11.0,11.0,97.8%,SF,11,2022
+8,New York Jets,6,0,0,0,0,0,0,1,10.0,10.0,82.4%,NYJ,11,2022
+9,Carolina Panthers,3,1,0,0,0,0,0,1,9.0,9.0,3.0%,CAR,11,2022
+10,Kansas City Chiefs,5,1,1,1,0,0,0,1,9.0,9.0,77.7%,KC,11,2022
+11,Indianapolis Colts,3,0,2,3,0,0,0,1,8.0,8.0,26.4%,IND,11,2022
+12,Philadelphia Eagles,4,0,1,1,0,0,0,1,7.0,7.0,51.6%,PHI,11,2022
+13,Las Vegas Raiders,3,0,0,1,0,0,0,1,6.0,6.0,24.5%,LV,11,2022
+14,New Orleans Saints,4,0,0,0,0,0,0,1,5.0,5.0,64.0%,NO,11,2022
+15,Green Bay Packers,3,1,0,0,0,0,0,1,5.0,5.0,26.4%,GB,11,2022
+16,Buffalo Bills,1,0,1,0,0,0,0,1,5.0,5.0,61.3%,BUF,11,2022
+17,Tennessee Titans,1,0,0,1,0,0,0,1,4.0,4.0,3.5%,TEN,11,2022
+18,Chicago Bears,0,0,2,1,0,0,0,1,4.0,4.0,33.9%,CHI,11,2022
+19,Los Angeles Rams,4,0,0,0,0,0,0,1,4.0,4.0,21.2%,LAR,11,2022
+20,Pittsburgh Steelers,2,2,0,0,0,0,0,1,2.0,2.0,75.9%,PIT,11,2022
+21,Los Angeles Chargers,1,0,1,2,0,0,0,1,2.0,2.0,13.8%,LAC,11,2022
+22,Houston Texans,0,0,0,0,0,0,0,1,1.0,1.0,31.9%,HOU,11,2022
+23,Denver Broncos,1,0,0,0,0,0,0,1,1.0,1.0,34.5%,DEN,11,2022
+24,Cleveland Browns,2,0,0,0,0,0,0,1,1.0,1.0,94.2%,CLE,11,2022
+25,Cincinnati Bengals,2,0,0,0,0,0,0,1,1.0,1.0,50.0%,CIN,11,2022
+26,New York Giants,0,0,0,1,0,0,0,1,-1.0,-1.0,2.4%,NYG,11,2022
+27,Minnesota Vikings,0,0,0,0,0,0,0,1,-4.0,-4.0,10.9%,MIN,11,2022
+28,Arizona Cardinals,0,0,0,0,0,0,0,1,-4.0,-4.0,0.8%,ARI,11,2022

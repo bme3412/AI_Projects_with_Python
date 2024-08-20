@@ -1,0 +1,33 @@
+Rank,Player,SACK,INT,FR,FF,DEF TD,SFTY,SPC TD,G,FPTS,FPTS/G,ROST,Team,Week,Year
+1,Baltimore Ravens,4,1,1,1,1,0,0,1,15.0,15.0,86.2%,BAL,2,2020
+2,Indianapolis Colts,3,3,0,0,0,1,0,1,15.0,15.0,26.4%,IND,2,2020
+3,Tampa Bay Buccaneers,5,2,2,2,0,0,0,1,14.0,14.0,20.8%,TB,2,2020
+4,Pittsburgh Steelers,7,1,1,1,0,1,0,1,13.0,13.0,75.9%,PIT,2,2020
+5,Chicago Bears,4,1,1,1,0,0,0,1,12.0,12.0,33.9%,CHI,2,2020
+6,Green Bay Packers,4,1,0,0,1,0,0,1,12.0,12.0,26.4%,GB,2,2020
+7,Arizona Cardinals,4,0,2,1,0,0,0,1,9.0,9.0,0.8%,ARI,2,2020
+8,New York Giants,4,2,0,1,0,0,0,1,9.0,9.0,2.4%,NYG,2,2020
+9,Los Angeles Rams,0,2,1,1,0,0,0,1,7.0,7.0,21.2%,LAR,2,2020
+10,New England Patriots,2,1,0,0,1,0,0,1,6.0,6.0,13.6%,NE,2,2020
+11,Tennessee Titans,2,2,0,0,0,0,0,1,5.0,5.0,3.5%,TEN,2,2020
+12,San Francisco 49ers,1,0,0,0,0,0,0,1,5.0,5.0,97.8%,SF,2,2020
+13,Denver Broncos,1,1,1,1,0,0,0,1,5.0,5.0,34.5%,DEN,2,2020
+14,Kansas City Chiefs,2,1,0,0,0,0,0,1,5.0,5.0,77.7%,KC,2,2020
+15,New York Jets,3,1,0,1,0,0,0,1,4.0,4.0,82.4%,NYJ,2,2020
+16,New Orleans Saints,3,0,1,0,0,0,0,1,4.0,4.0,64.0%,NO,2,2020
+17,Washington Commanders,3,1,0,1,0,0,0,1,4.0,4.0,8.1%,WAS,2,2020
+18,Cleveland Browns,3,0,1,1,0,0,0,1,4.0,4.0,94.2%,CLE,2,2020
+19,Houston Texans,4,0,0,0,0,0,0,1,4.0,4.0,31.9%,HOU,2,2020
+20,Minnesota Vikings,2,1,0,1,0,0,0,1,3.0,3.0,10.9%,MIN,2,2020
+21,Atlanta Falcons,1,0,3,4,0,0,0,1,3.0,3.0,16.7%,ATL,2,2020
+22,Los Angeles Chargers,1,0,0,0,0,0,0,1,3.0,3.0,13.8%,LAC,2,2020
+23,Seattle Seahawks,1,1,0,0,0,0,0,1,3.0,3.0,22.4%,SEA,2,2020
+24,Carolina Panthers,0,1,1,0,0,0,0,1,3.0,3.0,3.0%,CAR,2,2020
+25,Las Vegas Raiders,0,1,0,0,0,0,0,1,2.0,2.0,24.5%,LV,2,2020
+26,Buffalo Bills,3,0,0,1,0,0,0,1,2.0,2.0,61.3%,BUF,2,2020
+27,Miami Dolphins,1,0,1,1,0,0,0,1,2.0,2.0,69.9%,MIA,2,2020
+28,Philadelphia Eagles,1,0,1,0,0,0,0,1,1.0,1.0,51.6%,PHI,2,2020
+29,Jacksonville Jaguars,1,0,0,0,0,0,0,1,0.0,0.0,50.2%,JAC,2,2020
+30,Cincinnati Bengals,0,1,0,0,0,0,0,1,-2.0,-2.0,50.0%,CIN,2,2020
+31,Detroit Lions,1,0,0,0,0,0,0,1,-3.0,-3.0,38.6%,DET,2,2020
+32,Dallas Cowboys,1,0,0,0,0,0,0,1,-3.0,-3.0,92.7%,DAL,2,2020

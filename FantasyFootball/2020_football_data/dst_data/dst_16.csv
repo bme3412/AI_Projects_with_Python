@@ -1,0 +1,33 @@
+Rank,Player,SACK,INT,FR,FF,DEF TD,SFTY,SPC TD,G,FPTS,FPTS/G,ROST,Team,Week,Year
+1,Carolina Panthers,3,2,2,1,1,0,0,1,21.0,21.0,3.0%,CAR,16,2020
+2,Tampa Bay Buccaneers,4,1,1,1,0,0,0,1,12.0,12.0,20.8%,TB,16,2020
+3,San Francisco 49ers,3,1,1,2,0,0,0,1,11.0,11.0,97.8%,SF,16,2020
+4,Baltimore Ravens,6,0,0,0,0,0,0,1,10.0,10.0,86.2%,BAL,16,2020
+5,Dallas Cowboys,3,2,1,3,0,0,0,1,10.0,10.0,92.7%,DAL,16,2020
+6,Washington Commanders,4,1,1,2,0,0,0,1,9.0,9.0,8.1%,WAS,16,2020
+7,Seattle Seahawks,3,1,0,0,0,0,0,1,9.0,9.0,22.4%,SEA,16,2020
+8,Pittsburgh Steelers,5,1,1,1,0,0,0,1,9.0,9.0,75.9%,PIT,16,2020
+9,New York Jets,4,0,2,3,0,0,0,1,9.0,9.0,82.4%,NYJ,16,2020
+10,Kansas City Chiefs,4,0,1,3,0,0,0,1,7.0,7.0,77.7%,KC,16,2020
+11,Buffalo Bills,3,0,0,0,0,0,0,1,7.0,7.0,61.3%,BUF,16,2020
+12,Los Angeles Chargers,2,2,0,0,0,0,0,1,7.0,7.0,13.8%,LAC,16,2020
+13,Green Bay Packers,2,2,0,1,0,0,0,1,7.0,7.0,26.4%,GB,16,2020
+14,Los Angeles Rams,5,0,0,0,0,0,0,1,6.0,6.0,21.2%,LAR,16,2020
+15,Arizona Cardinals,3,0,1,1,0,0,0,1,6.0,6.0,0.8%,ARI,16,2020
+16,Cleveland Browns,2,0,0,0,0,0,0,1,6.0,6.0,94.2%,CLE,16,2020
+17,Chicago Bears,1,2,0,0,0,0,0,1,6.0,6.0,33.9%,CHI,16,2020
+18,Miami Dolphins,3,0,1,0,0,0,0,1,5.0,5.0,69.9%,MIA,16,2020
+19,Atlanta Falcons,0,2,0,0,0,0,0,1,5.0,5.0,16.7%,ATL,16,2020
+20,Detroit Lions,2,0,0,1,0,0,1,1,4.0,4.0,38.6%,DET,16,2020
+21,Las Vegas Raiders,3,0,0,0,0,0,0,1,3.0,3.0,24.5%,LV,16,2020
+22,Denver Broncos,2,0,0,1,0,0,0,1,3.0,3.0,34.5%,DEN,16,2020
+23,Cincinnati Bengals,1,0,1,4,0,0,0,1,2.0,2.0,50.0%,CIN,16,2020
+24,New York Giants,0,0,1,0,0,0,0,1,2.0,2.0,2.4%,NYG,16,2020
+25,New Orleans Saints,2,0,0,2,0,0,0,1,1.0,1.0,64.0%,NO,16,2020
+26,Philadelphia Eagles,2,1,0,0,0,0,0,1,0.0,0.0,51.6%,PHI,16,2020
+27,Indianapolis Colts,1,0,0,0,0,0,0,1,0.0,0.0,26.4%,IND,16,2020
+28,Minnesota Vikings,0,2,0,0,0,0,0,1,0.0,0.0,10.9%,MIN,16,2020
+29,Tennessee Titans,1,1,0,0,0,0,0,1,-1.0,-1.0,3.5%,TEN,16,2020
+30,Jacksonville Jaguars,1,1,0,1,0,0,0,1,-1.0,-1.0,50.2%,JAC,16,2020
+31,Houston Texans,0,0,0,0,0,0,0,1,-4.0,-4.0,31.9%,HOU,16,2020
+32,New England Patriots,0,0,0,1,0,0,0,1,-4.0,-4.0,13.6%,NE,16,2020

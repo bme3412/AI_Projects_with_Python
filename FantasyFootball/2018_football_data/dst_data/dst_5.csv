@@ -1,0 +1,31 @@
+Rank,Player,SACK,INT,FR,FF,DEF TD,SFTY,SPC TD,G,FPTS,FPTS/G,ROST,Team,Week,Year
+1,Cincinnati Bengals,3,2,1,1,2,0,0,1,22.0,22.0,50.0%,CIN,5,2018
+2,Kansas City Chiefs,5,4,1,1,1,0,0,1,22.0,22.0,77.7%,KC,5,2018
+3,Arizona Cardinals,4,2,3,3,1,0,0,1,21.0,21.0,0.8%,ARI,5,2018
+4,Pittsburgh Steelers,6,0,1,1,1,0,0,1,16.0,16.0,75.9%,PIT,5,2018
+5,Minnesota Vikings,3,0,2,1,1,0,0,1,13.0,13.0,10.9%,MIN,5,2018
+6,Buffalo Bills,2,1,2,3,0,0,0,1,12.0,12.0,61.3%,BUF,5,2018
+7,Carolina Panthers,1,2,1,0,1,0,0,1,12.0,12.0,3.0%,CAR,5,2018
+8,Baltimore Ravens,5,1,0,1,0,0,0,1,11.0,11.0,86.2%,BAL,5,2018
+9,Cleveland Browns,2,1,1,1,0,0,0,1,11.0,11.0,94.2%,CLE,5,2018
+10,Los Angeles Chargers,3,1,1,1,0,0,0,1,11.0,11.0,13.8%,LAC,5,2018
+11,Detroit Lions,4,0,3,2,0,0,0,1,10.0,10.0,38.6%,DET,5,2018
+12,New Orleans Saints,3,1,1,1,0,0,0,1,8.0,8.0,64.0%,NO,5,2018
+13,Tennessee Titans,1,1,0,0,0,0,0,1,7.0,7.0,3.5%,TEN,5,2018
+14,New York Jets,4,1,0,2,0,0,0,1,7.0,7.0,82.4%,NYJ,5,2018
+15,Houston Texans,2,2,0,0,0,0,0,1,7.0,7.0,31.9%,HOU,5,2018
+16,New England Patriots,1,2,1,1,0,0,0,1,7.0,7.0,13.6%,NE,5,2018
+17,Miami Dolphins,2,1,0,0,0,0,1,1,6.0,6.0,69.9%,MIA,5,2018
+18,Dallas Cowboys,1,1,1,1,0,0,0,1,6.0,6.0,92.7%,DAL,5,2018
+19,Jacksonville Jaguars,1,2,0,0,0,0,0,1,5.0,5.0,50.2%,JAC,5,2018
+20,New York Giants,1,2,0,1,0,0,0,1,5.0,5.0,2.4%,NYG,5,2018
+21,Philadelphia Eagles,1,0,1,0,0,0,0,1,4.0,4.0,51.6%,PHI,5,2018
+22,Denver Broncos,1,1,1,1,0,0,0,1,4.0,4.0,34.5%,DEN,5,2018
+23,Seattle Seahawks,1,2,0,1,0,0,0,1,4.0,4.0,22.4%,SEA,5,2018
+24,Green Bay Packers,3,0,0,0,0,0,0,1,2.0,2.0,26.4%,GB,5,2018
+25,Las Vegas Raiders,1,0,0,0,0,0,0,1,1.0,1.0,24.5%,LV,5,2018
+26,San Francisco 49ers,1,0,0,0,0,0,0,1,1.0,1.0,97.8%,SF,5,2018
+27,Los Angeles Rams,2,0,0,0,0,0,0,1,1.0,1.0,21.2%,LAR,5,2018
+28,Indianapolis Colts,0,2,0,0,0,0,0,1,0.0,0.0,26.4%,IND,5,2018
+29,Washington Commanders,2,0,1,2,0,0,0,1,0.0,0.0,8.1%,WAS,5,2018
+30,Atlanta Falcons,0,1,0,1,0,0,0,1,-2.0,-2.0,16.7%,ATL,5,2018
